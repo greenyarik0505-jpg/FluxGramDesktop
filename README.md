@@ -1,4 +1,4 @@
-# FluxGram
+# FluxGram Desktop
 
 ```
   _____ _     _   ___  ______ _____  ___  ___  ___ 
@@ -8,6 +8,8 @@
  |_|   |_____|\___//_/\_\_| \_\_|  |_| |_|_| |_|_| |_|
                                                       
 ```
+
+---
 
 ## Features
 
@@ -53,7 +55,7 @@ You can download prebuilt Windows binary from [Releases tab](https://github.com/
 #### Winget
 
 ```bash
-winget install FluxGramDesktop
+winget install RadolynLabs.FluxGramDesktop
 ```
 
 #### Scoop
@@ -65,7 +67,8 @@ scoop install fluxgram
 
 #### Self-built
 
-Follow [official guide](https://github.com/greenyarik0505-jpg/FluxGramDesktop/blob/dev/docs/building-win-x64.md) if you want to build by yourself.
+Follow [official guide](https://github.com/greenyarik0505-jpg/FluxGramDesktop/blob/dev/docs/building-win-x64.md) if you want to
+build by yourself.
 
 ### macOS
 
@@ -73,19 +76,62 @@ Follow [official guide](https://github.com/greenyarik0505-jpg/FluxGramDesktop/bl
 
 You can download prebuilt macOS package from [Releases tab](https://github.com/greenyarik0505-jpg/FluxGramDesktop/releases).
 
+#### Homebrew
+
+```bash
+brew install --cask fluxgram
+```
+
 ### Arch Linux
 
 #### From source (recommended)
 
-Install `fluxgram-desktop` from AUR.
+Install `fluxgram-desktop` from [AUR](https://aur.archlinux.org/packages/fluxgram-desktop).
 
 #### Prebuilt binaries
 
-Install `fluxgram-desktop-bin` from AUR.
+Install `fluxgram-desktop-bin` from [AUR](https://aur.archlinux.org/packages/fluxgram-desktop-bin).
+
+Note: these binaries aren't officially maintained by us.
 
 ### NixOS
 
-Install `fluxgram-desktop` from nixpkgs.
+#### Flake (recommended)
+
+Install `fluxgram-desktop` from [ndfined-crp/ayugram-desktop](https://github.com/ndfined-crp/ayugram-desktop)
+
+#### Nixpkgs
+
+Install `fluxgram-desktop` from [nixpkgs](https://search.nixos.org/packages?channel=unstable&show=ayugram-desktop)
+
+### ALT Linux
+
+[Sisyphus](https://packages.altlinux.org/en/sisyphus/srpms/ayugram-desktop/)
+
+### Gentoo Linux
+
+See [this repository](https://codeberg.org/OverLessArtem/ayugram-ebuild-gentoo) for installation manual.
+
+### Void Linux
+See [this repository](https://codeberg.org/OverLessArtem/ayugram-template-void) for installation manual.
+
+### EPM
+
+`epm play fluxgram`
+
+### Fedora
+
+From [RPM Fusion](https://admin.rpmfusion.org/pkgdb/package/free/ayugram-desktop/) repository.
+
+```bash
+dnf install fluxgram-desktop
+```
+
+### Any other Linux distro
+
+Flatpak: https://github.com/0FL01/AyuGramDesktop-flatpak
+
+Or follow the [official guide](https://github.com/greenyarik0505-jpg/FluxGramDesktop/blob/dev/docs/building-linux.md).
 
 ### Remarks for Windows
 
@@ -103,7 +149,6 @@ Make sure you have these components installed with VS Build Tools:
 - [Kotatogram](https://github.com/kotatogram/kotatogram-desktop)
 - [64Gram](https://github.com/TDesktop-x64/tdesktop)
 - [Forkgram](https://github.com/forkgram/tdesktop)
-- [AyuGram](https://github.com/AyuGram/AyuGramDesktop)
 
 ### Libraries used
 
@@ -115,3 +160,7 @@ Make sure you have these components installed with VS Build Tools:
 ### Icons
 
 - [Solar Icon Set](https://www.figma.com/community/file/1166831539721848736)
+
+### Bots
+
+- [TelegramDB](https://t.me/tgdatabase) for username lookup by ID (until closing free inline mode at 2 April 2026)
