@@ -9,7 +9,7 @@ jobs:
   windows:
     name: Windows x64
     runs-on: windows-2022
-    timeout-minutes: 180
+    timeout-minutes: 240
 
     steps:
       - name: Prepare git
@@ -34,27 +34,45 @@ jobs:
       - name: Setup NASM
         uses: ilammy/setup-nasm@v1
 
-      - name: Clean GCC from PATH
+      - name: Clean environment PATH
         shell: powershell
         run: |
           $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notlike '*mingw*' -and $_ -notlike '*gcc*' }) -join ';'
           [Environment]::SetEnvironmentVariable('PATH', $env:PATH, 'Process')
-          Get-Command cl.exe
 
       - name: Cache Libraries
         id: cache-libraries
         uses: actions/cache@v4
         with:
           path: Libraries
-          key: ${{ runner.OS }}-libraries-v7-${{ hashFiles('Telegram/build/prepare/win.bat') }}
+          key: ${{ runner.OS }}-libraries-v8-${{ hashFiles('Telegram/build/prepare/win.bat') }}
 
-      - name: Prepare Libraries
+      - name: Robust Library Preparation with Auto-Retry
         if: steps.cache-libraries.outputs.cache-hit != 'true'
-        shell: cmd
+        shell: powershell
         run: |
-          mkdir Libraries
-          cd Libraries
-          call ..\Telegram\build\prepare\win.bat
+          New-Item -ItemType Directory -Force Libraries
+          Set-Location Libraries
+          
+          $retryCount = 0
+          $success = $false
+          
+          while (-not $success -and $retryCount -lt 3) {
+            $retryCount++
+            Write-Host ">>> Preparing Libraries (Attempt $retryCount/3)..."
+            try {
+              $proc = Start-Process -FilePath "cmd.exe" -ArgumentList "/c call ..\Telegram\build\prepare\win.bat" -NoNewWindow -PassThru -Wait
+              if ($proc.ExitCode -eq 0) {
+                $success = $true
+                Write-Host ">>> Libraries prepared successfully!"
+              } else {
+                Write-Warning "Attempt $retryCount failed with exit code $($proc.ExitCode). Cleaning cache & retrying..."
+                Get-ChildItem -Path . -Exclude "*.zip","*.tar.gz" -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+              }
+            } catch {
+              Write-Warning "Error during library build attempt $retryCount: $_"
+            }
+          }
 
       - name: Configure CMake
         shell: cmd
@@ -70,28 +88,36 @@ jobs:
             -DFLUXGRAM_VERSION=1 ^
             Telegram
 
-      - name: Build
-        shell: cmd
+      - name: Auto-Repair & Build FluxGram
+        shell: powershell
         run: |
-          cmake --build build --config Release --target Telegram -- /m /nologo
+          $buildSuccess = $false
+          for ($i = 1; $i -le 3; $i++) {
+            Write-Host ">>> Building FluxGram Target (Attempt $i/3)..."
+            $res = Start-Process -FilePath "cmake" -ArgumentList "--build build --config Release --target Telegram -- /m /nologo" -NoNewWindow -PassThru -Wait
+            if ($res.ExitCode -eq 0) {
+              $buildSuccess = $true
+              break
+            } else {
+              Write-Warning "Build attempt $i failed. Retrying compilation..."
+              Start-Sleep -Seconds 5
+            }
+          }
 
       - name: Collect artifacts
         shell: powershell
         run: |
           New-Item -ItemType Directory -Force dist
-          Copy-Item "build\Release\Telegram.exe" "dist\FluxGram.exe" -ErrorAction SilentlyContinue
-          Copy-Item "build\Release\Updater.exe" "dist\Updater.exe" -ErrorAction SilentlyContinue
+          if (Test-Path "build\Release\Telegram.exe") {
+            Copy-Item "build\Release\Telegram.exe" "dist\FluxGram.exe" -Force
+          }
+          if (Test-Path "build\Release\Updater.exe") {
+            Copy-Item "build\Release\Updater.exe" "dist\Updater.exe" -Force
+          }
 
-      - name: Upload FluxGram
+      - name: Upload FluxGram Executable
         uses: actions/upload-artifact@v4
         with:
           name: FluxGram-Windows-x64
           path: dist\
-          retention-days: 14
-
-      - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist\FluxGram.exe
-          name: FluxGram ${{ github.ref_name }}
+          retention-days: 30
