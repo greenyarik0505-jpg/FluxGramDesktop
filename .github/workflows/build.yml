@@ -31,20 +31,22 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Setup Perl
-        uses: shogo82148/actions-setup-perl@v1
-        with:
-          perl-version: '5.38'
-
       - name: Setup NASM
         uses: ilammy/setup-nasm@v1
+
+      - name: Clean GCC from PATH
+        shell: powershell
+        run: |
+          $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notlike '*mingw*' -and $_ -notlike '*gcc*' }) -join ';'
+          [Environment]::SetEnvironmentVariable('PATH', $env:PATH, 'Process')
+          Get-Command cl.exe
 
       - name: Cache Libraries
         id: cache-libraries
         uses: actions/cache@v4
         with:
           path: Libraries
-          key: ${{ runner.OS }}-libraries-v6-${{ hashFiles('Telegram/build/prepare/win.bat') }}
+          key: ${{ runner.OS }}-libraries-v7-${{ hashFiles('Telegram/build/prepare/win.bat') }}
 
       - name: Prepare Libraries
         if: steps.cache-libraries.outputs.cache-hit != 'true'
