@@ -1,53 +1,36 @@
-# Contributing
+# Руководство по внесению вклада в FluxGram (Contributing Guidelines)
 
-This document describes how you can contribute to FluxGram Desktop.
+Спасибо за интерес к разработке **FluxGram Desktop**! Мы приветствуем любые улучшения, от исправления опечаток в документации до оптимизации ядра C++ и UI компонентов.
 
-**Table of Contents**
+---
 
-* [What contributions are accepted](#what-contributions-are-accepted)
-* [Build instructions](#build-instructions)
-* [Pull upstream changes into your fork regularly](#pull-upstream-changes-into-your-fork-regularly)
-* [How to get your pull request accepted](#how-to-get-your-pull-request-accepted)
-  * [Keep your pull requests limited to a single issue](#keep-your-pull-requests-limited-to-a-single-issue)
-    * [Squash your commits to a single commit](#squash-your-commits-to-a-single-commit)
-  * [Don't mix code changes with whitespace cleanup](#dont-mix-code-changes-with-whitespace-cleanup)
-  * [Keep your code simple!](#keep-your-code-simple)
-  * [Test your changes!](#test-your-changes)
-  * [Write a good commit message](#write-a-good-commit-message)
+## 📋 Как внести свой вклад
 
-## What contributions are accepted
+1. **Создайте Fork репозитория** на GitHub.
+2. **Создайте ветку для вашей фичи:**
+   ```bash
+   git checkout -b feature/my-cool-feature
+   ```
+3. **Внесите изменения** с соблюдением стиля C++ кода проекта (`clang-format`).
+4. **Запустите локальное тестирование:**
+   ```cmd
+   cmake --build build --config Release
+   ```
+5. **Создайте Pull Request** в ветку `dev`.
 
-We highly appreciate your contributions in the matter of fixing bugs and optimizing the FluxGram Desktop source code and its documentation. In case of fixing the existing user experience please push to your fork and [submit a pull request][pr].
+---
 
-## Build instructions
+## 🎨 Стандарты кода C++
 
-See [folder with instructions][build_instructions] for details on the various build environments.
+* Используйте **C++20** стандарты.
+* Форматируйте заголовочные файлы с помощью макросов Qt/Telegram (`u"string"_q`, `not_null<T*>`).
+* Все новые компоненты интерфейса приватностей должны находиться в директории `Telegram/SourceFiles/flux/`.
 
-## Pull upstream changes into your fork regularly
+---
 
-Telegram Desktop is advancing quickly. It is therefore critical that you pull upstream changes into your fork on a regular basis.
+## 🐞 Сообщения об ошибках (Issue Reporting)
 
-To pull in upstream changes:
-
-    git remote add upstream https://github.com/greenyarik0505-jpg/FluxGramDesktop.git
-    git fetch upstream dev
-
-Then rebase your changes on the latest commits in the `dev` branch:
-
-    git rebase upstream/dev
-
-After that, you have to force push your commits:
-
-    git push --force
-
-## How to get your pull request accepted
-
-We want to improve FluxGram Desktop with your contributions. Follow these rules and you should succeed without a problem!
-
-### Keep your pull requests limited to a single issue
-
-Pull requests should be as small/atomic as possible.
-
-[//]: # (LINKS)
-[pr]: https://github.com/greenyarik0505-jpg/FluxGramDesktop/compare
-[build_instructions]: https://github.com/greenyarik0505-jpg/FluxGramDesktop/blob/dev/docs
+При обнаружении ошибки, пожалуйста, укажите:
+* Версию ОС (Windows 10/11 x64).
+* Логи из файла `tdata/user_data/logs/log.txt`.
+* Шаги для воспроизведения проблемы.
