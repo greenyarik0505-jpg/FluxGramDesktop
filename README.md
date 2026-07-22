@@ -1,27 +1,28 @@
 <div align="center">
 
 ```
- __   __  ___   ____    ___   ___  ___   ____     ___   ___ ___ 
- \ \ / / / _ \ |  _ \  |_ _| / __|| _ \ / ___|   / _ \ | \ \/ /
-  \ V / / /_\ \| |_) |  | | | (__ |   /| |  _   / /_\ \| |\/| | 
-   | |  |  _  ||  _ <   | |  \___||_|\_\\____|  |  _  ||_|  |_| 
-   |_|  |_| |_||_| \_\ |___|                    |_| |_|         
+  _____ _     _   ___  ______ _____  ___  ___  ___ 
+ |  ___| |   | | | \ \/ /  _ \  ___|/ _ \/ _ \/ _ \
+ | |_  | |   | | | |\  /| |_| | |_ / /_\/ /_\/ /_\ \
+ |  _| | |___| |_| |/  \|  _ <|  _||  _  |  _  |  _  |
+ |_|   |_____|\___//_/\_\_| \_\_|  |_| |_|_| |_|_| |_|
+                                                      
 ```
 
 # 🚀 FluxGram Desktop — Полное техническое руководство
 
-### *Современный, высоковольтный и конфиденциальный клиент Telegram на базе Telegram Desktop & AyuGram Core*
+### *Современный, высоковольтный и конфиденциальный клиент Telegram на базе Telegram Desktop & Flux Core*
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg?style=for-the-badge&logo=gnu)](LICENSE)
 [![Base: Telegram Desktop](https://img.shields.io/badge/Base-Telegram%20Desktop%207.0.4-2CA5E0?style=for-the-badge&logo=telegram)](https://github.com/telegramdesktop/tdesktop)
-[![Features: AyuGram](https://img.shields.io/badge/Features-AyuGram%20Core-8A2BE2?style=for-the-badge)](https://github.com/AyuGram/AyuGramDesktop)
+[![Features: Flux Core](https://img.shields.io/badge/Features-Flux%20Core-8A2BE2?style=for-the-badge)](https://github.com/greenyarik0505-jpg/FluxGramDesktop)
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20-00599C?style=for-the-badge&logo=c%2B%2B)](https://isocpp.org/)
 [![Qt Framework](https://img.shields.io/badge/Qt-6.8.2-41CD52?style=for-the-badge&logo=qt)](https://www.qt.io/)
 [![Build: MSVC 2022](https://img.shields.io/badge/Compiler-MSVC%202022-0078D4?style=for-the-badge&logo=visualstudio)](https://visualstudio.microsoft.com/)
 
 ---
 
-![FluxGram Banner](Telegram/Resources/art/icon512.png)
+<img src=".github/FluxGramLogo.png" width="220" alt="FluxGram Logo">
 
 </div>
 
@@ -56,18 +57,18 @@
 
 **FluxGram Desktop** — это независимый модифицированный клиент для мессенджера Telegram. Проект создан с целью предоставить пользователю максимально широкий набор инструментов контроля своей конфиденциальности и автономности.
 
-В основе **FluxGram** лежит официальный открытый код приложения **Telegram Desktop** версии 7.0.4+, в который интегрировано оптимизированное функциональное ядро **Flux Core** (переработанные алгоритмы из проекта **AyuGram Desktop**).
+В основе **FluxGram** лежит официальный открытый код приложения **Telegram Desktop** версии 7.0.4+, в который интегрировано оптимизированное функциональное ядро **Flux Core**.
 
 ### Ключевые принципы разработки:
 * 🔒 **Полная локальность:** Никаких внешних сторонних серверов. Все настройки, удаленные сообщения и история изменений сохраняются исключительно на жестком диске вашего компьютера.
 * ⚡ **Высокая производительность:** Интеграция выполняется прямо на уровне компиляции C++20 с использованием родных библиотек Qt 6, без применения накладных веб-оберток (Electron/Webview).
-* 🎨 **Индивидуальный дизайн:** Специально разработанный логотип **Squircle Y** и собственный раздел настроек в интерфейсе приложения.
+* 🎨 **Индивидуальный дизайн:** Специально разработанный официальный логотип FluxGram и собственный раздел настроек в интерфейсе приложения.
 
 ---
 
 ## 2. Полный функциональный матрикс
 
-| Функциональный блок | Официальный Telegram | FluxGram (AyuGram Core) |
+| Функциональный блок | Официальный Telegram | FluxGram Desktop |
 | :--- | :---: | :---: |
 | **Базовые звонки и групповые чаты** | ✅ | ✅ |
 | **Секретные чаты и шифрование MTProto 2.0** | ✅ | ✅ |
@@ -75,6 +76,8 @@
 | **Скрытие присутствия Онлайн** | ❌ | ✅ |
 | **Невидимый просмотр историй (Stories)** | ❌ | ✅ |
 | **Сохранение удаленных сообщений в чате** | ❌ | ✅ |
+| **«Keep locally» (Сохранение удаляемых в группах сообщений)** | ❌ | ✅ |
+| **«Save to self» (Сохранение копии при спам-репорте)** | ❌ | ✅ |
 | **История исходных текстов до редактирования** | ❌ | ✅ |
 | **Просмотр сгорающих фото/видео без таймера** | ❌ | ✅ |
 
@@ -124,19 +127,19 @@ flux/
 │   ├── message_shot/          # Генератор скриншотов диалогов
 │   └── ghost/                 # Логика режима призрака
 ├── ui/                        # Интерфейсы
-│   ├── ayu_userpic.cpp        # Отрисовка кастомных аватаров
+│   ├── flux_userpic.cpp       # Отрисовка кастомных аватаров
 │   └── settings/
 │       ├── settings_main.cpp  # Окно настроек FluxGram
 │       └── settings_main.h
 ```
 
 ### 4.2. Модифицированные ядровые файлы Telegram
-1. **[`version.h`](file:///d:/fluxgram/tdesktop/Telegram/SourceFiles/core/version.h):**
+1. **`version.h`:**
    * Изменены константы `AppName = "FluxGram"_cs;` и `AppFile = "FluxGram"_cs;`.
-2. **[`settings_main.cpp`](file:///d:/fluxgram/tdesktop/Telegram/SourceFiles/settings/sections/settings_main.cpp):**
+2. **`settings_main.cpp`:**
    * Внедрена кнопка `.title = tr::flux_FluxPreferences()` в секции главных настроек.
-3. **[`Resources/art/`](file:///d:/fluxgram/tdesktop/Telegram/Resources/art/):**
-   * Заменены файлы `logo_256.png`, `icon256.png`, `icon512.png` на новую иконку Squircle Y.
+3. **`Resources/art/`:**
+   * Заменены файлы `logo_256.png`, `icon256.png`, `icon512.png` на новый логотип FluxGram.
 
 ---
 
@@ -220,7 +223,7 @@ sudo apt install -y build-essential cmake ninja-build qt6-base-dev qt6-image-for
 
 #### Сборка:
 ```bash
-git clone --recursive https://github.com/telegramdesktop/tdesktop.git fluxgram
+git clone --recursive https://github.com/greenyarik0505-jpg/FluxGramDesktop.git fluxgram
 cd fluxgram
 cmake -B build -S . -G "Ninja" -D CMAKE_BUILD_TYPE=Release -D TDESKTOP_API_TEST=ON
 cmake --build build
@@ -258,10 +261,6 @@ cmake --build build
 * **Причина:** CMake не может найти директорию с библиотеками Qt.
 * **Решение:** Укажите явный путь через `-D Qt6_DIR=C:/Qt/6.8.2/msvc2022_64/lib/cmake/Qt6`.
 
-#### Ошибка: `Could not find a package configuration file provided by "ada"`
-* **Причина:** Отсутствует библиотека парсинга URL Ada.
-* **Решение:** В FluxGram добавлена автоматическая подгрузка Ada через `FetchContent`. Убедитесь в наличии интернет-соединения при конфигурировании CMake.
-
 #### Ошибка компилятора: `out of memory / C1060`
 * **Причина:** Нехватка оперативной памяти при сборке на слишком большом количестве параллельных потоков.
 * **Решение:** Ограничьте количество потоков сборки Ninja: `cmake --build build -j 2`.
@@ -282,7 +281,7 @@ cmake --build build
 
 ### Авторы и Правообладатели:
 1. **Telegram Desktop:** © Telegram FZ-LLC, исходный код [github.com/telegramdesktop/tdesktop](https://github.com/telegramdesktop/tdesktop) под лицензией GPLv3.
-2. **AyuGram Desktop:** © AyuGram Development Team, исходный код [github.com/AyuGram/AyuGramDesktop](https://github.com/AyuGram/AyuGramDesktop) под лицензией GPLv3.
+2. **FluxGram Desktop:** © FluxGram Development Team, 2026.
 
 ---
 
