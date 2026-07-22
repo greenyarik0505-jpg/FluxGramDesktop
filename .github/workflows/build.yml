@@ -39,15 +39,20 @@ jobs:
       - name: Setup NASM
         uses: ilammy/setup-nasm@v1
 
-      - name: Install ninja
-        run: choco install ninja -y
+      - name: Force MSVC Compiler
+        shell: cmd
+        run: |
+          set CC=cl
+          set CXX=cl
+          echo CC=cl >> %GITHUB_ENV%
+          echo CXX=cl >> %GITHUB_ENV%
 
       - name: Cache Libraries
         id: cache-libraries
         uses: actions/cache@v4
         with:
           path: Libraries
-          key: ${{ runner.OS }}-libraries-v4-${{ hashFiles('Telegram/build/prepare/win.bat') }}
+          key: ${{ runner.OS }}-libraries-v5-${{ hashFiles('Telegram/build/prepare/win.bat') }}
 
       - name: Prepare Libraries
         if: steps.cache-libraries.outputs.cache-hit != 'true'
@@ -64,6 +69,8 @@ jobs:
             -G "Visual Studio 17 2022" ^
             -A x64 ^
             -DCMAKE_BUILD_TYPE=Release ^
+            -DCMAKE_C_COMPILER=cl ^
+            -DCMAKE_CXX_COMPILER=cl ^
             -DTDESKTOP_API_ID=2040 ^
             -DTDESKTOP_API_HASH=b18441a1ff607e10a989891a5462e627 ^
             -DDESKTOP_APP_USE_PACKAGED=OFF ^
