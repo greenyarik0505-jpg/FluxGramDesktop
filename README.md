@@ -275,7 +275,8 @@ cmake --build build
 
 ### Авторы и Правообладатели:
 1. **Telegram Desktop:** © Telegram FZ-LLC, исходный код [github.com/telegramdesktop/tdesktop](https://github.com/telegramdesktop/tdesktop) под лицензией GPLv3.
-2. **FluxGram Desktop:** © FluxGram Development Team, 2026.
+2. **AyuGram Desktop:** © AyuGram Development Team, исходный код [github.com/AyuGram/AyuGramDesktop](https://github.com/AyuGram/AyuGramDesktop) под лицензией GPLv3.
+3. **FluxGram Desktop:** © FluxGram Development Team, 2026.
 
 ---
 
