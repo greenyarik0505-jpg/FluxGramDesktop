@@ -9,8 +9,6 @@
                                                       
 ```
 
-A **fast, private, feature-rich** Telegram Desktop fork.
-
 ---
 
 ## ✨ Features
@@ -27,10 +25,49 @@ A **fast, private, feature-rich** Telegram Desktop fork.
 - 🖼️ **Media Preview** — quick preview & reactions
 - 🎨 **Enhanced Appearance** — themes, colors, layout tweaks
 
+And many more.
+
 ---
 
 ## 📥 Downloads
 
 ### Windows
 
-Binary releases are compiled automatically via GitHub Actions in the [Actions tab](https://github.com/greenyarik0505-jpg/AyuGramDesktop/actions).
+#### Official
+
+You can download prebuilt Windows binaries from the [Releases tab](https://github.com/greenyarik0505-jpg/FluxGramDesktop/releases) or from the [Actions tab](https://github.com/greenyarik0505-jpg/FluxGramDesktop/actions).
+
+#### Self-built
+
+Follow the official build guide in `docs/building-win-x64.md` if you want to build by yourself.
+
+---
+
+## 🛠️ Requirements for Building (Windows)
+
+Make sure you have these components installed with VS Build Tools:
+
+- C++ MFC latest (x86 & x64)
+- C++ ATL latest (x86 & x64)
+- latest Windows 11 SDK
+
+---
+
+## 🙏 Credits
+
+### Base
+
+- [AyuGram Desktop](https://github.com/AyuGram/AyuGramDesktop)
+- [Telegram Desktop](https://github.com/telegramdesktop/tdesktop)
+- [Kotatogram](https://github.com/kotatogram/kotatogram-desktop)
+- [64Gram](https://github.com/TDesktop-x64/tdesktop)
+
+### Libraries used
+
+- [JSON for Modern C++](https://github.com/nlohmann/json)
+- [SQLite](https://github.com/sqlite/sqlite)
+- [sqlite_orm](https://github.com/fnc12/sqlite_orm)
+
+### Icons
+
+- [Solar Icon Set](https://www.figma.com/community/file/1166831539721848736)
