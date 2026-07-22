@@ -9,7 +9,7 @@ jobs:
   windows:
     name: Windows x64
     runs-on: windows-2022
-    timeout-minutes: 240
+    timeout-minutes: 360
 
     steps:
       - name: Prepare git
@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Libraries
-          key: ${{ runner.OS }}-libraries-v8-${{ hashFiles('Telegram/build/prepare/win.bat') }}
+          key: ${{ runner.OS }}-libraries-v9-${{ hashFiles('Telegram/build/prepare/win.bat') }}
 
       - name: Robust Library Preparation with Auto-Retry
         if: steps.cache-libraries.outputs.cache-hit != 'true'
@@ -57,17 +57,18 @@ jobs:
           $retryCount = 0
           $success = $false
           
-          while (-not $success -and $retryCount -lt 3) {
+          while (-not $success -and $retryCount -lt 5) {
             $retryCount++
-            Write-Host ">>> Preparing Libraries (Attempt $retryCount/3)..."
+            Write-Host ">>> Preparing Libraries (Attempt $retryCount/5)..."
             try {
               $proc = Start-Process -FilePath "cmd.exe" -ArgumentList "/c call ..\Telegram\build\prepare\win.bat" -NoNewWindow -PassThru -Wait
               if ($proc.ExitCode -eq 0) {
                 $success = $true
                 Write-Host ">>> Libraries prepared successfully!"
               } else {
-                Write-Warning "Attempt $retryCount failed with exit code $($proc.ExitCode). Cleaning cache & retrying..."
+                Write-Warning "Attempt $retryCount failed. Auto-repairing workspace..."
                 Get-ChildItem -Path . -Exclude "*.zip","*.tar.gz" -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+                Start-Sleep -Seconds 10
               }
             } catch {
               Write-Warning "Error during library build attempt $retryCount: $_"
@@ -92,15 +93,16 @@ jobs:
         shell: powershell
         run: |
           $buildSuccess = $false
-          for ($i = 1; $i -le 3; $i++) {
-            Write-Host ">>> Building FluxGram Target (Attempt $i/3)..."
+          for ($i = 1; $i -le 5; $i++) {
+            Write-Host ">>> Building FluxGram Target (Attempt $i/5)..."
             $res = Start-Process -FilePath "cmake" -ArgumentList "--build build --config Release --target Telegram -- /m /nologo" -NoNewWindow -PassThru -Wait
             if ($res.ExitCode -eq 0) {
               $buildSuccess = $true
+              Write-Host ">>> FluxGram compiled successfully!"
               break
             } else {
               Write-Warning "Build attempt $i failed. Retrying compilation..."
-              Start-Sleep -Seconds 5
+              Start-Sleep -Seconds 10
             }
           }
 
