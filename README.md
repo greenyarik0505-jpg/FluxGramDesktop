@@ -1,11 +1,11 @@
 # FluxGram Desktop
 
 ```
- ___  _   _   ___  _  _  ___  ___    _    __  __
-| __|| | | | | \ \/ /| __|  _ \  /\  |\/| |
-| _| | |_| |  |/\/\ || _| |   / /  \ | |  |
-|_|   \___/  |_|  |_||___||_|\_\/_/\_\|_|  |
-
+ __   __  ___   ____    ___   ___  ___   ____     ___   ___ ___ 
+ \ \ / / / _ \ |  _ \  |_ _| / __|| _ \ / ___|   / _ \ | \ \/ /
+  \ V / / /_\ \| |_) |  | | | (__ |   /| |  _   / /_\ \| |\/| | 
+   | |  |  _  ||  _ <   | |  \___||_|\_\\____|  |  _  ||_|  |_| 
+   |_|  |_| |_||_| \_\ |___|                    |_| |_|       
 ```
 
 A **fast, private, feature-rich** Telegram Desktop fork.
@@ -26,35 +26,10 @@ A **fast, private, feature-rich** Telegram Desktop fork.
 - 🖼️ **Media Preview** — quick preview & reactions
 - 🎨 **Enhanced Appearance** — themes, colors, layout tweaks
 
-And many more!
-
 ---
 
 ## 📥 Downloads
 
 ### Windows
 
-#### Self-built
-
-Follow the build guide in `docs/building-win-x64.md`.
-
----
-
-## 🙏 Credits
-
-### Base
-
-- [AyuGram Desktop](https://github.com/AyuGram/AyuGramDesktop)
-- [Telegram Desktop](https://github.com/telegramdesktop/tdesktop)
-- [Kotatogram](https://github.com/kotatogram/kotatogram-desktop)
-- [64Gram](https://github.com/TDesktop-x64/tdesktop)
-
-### Libraries
-
-- [JSON for Modern C++](https://github.com/nlohmann/json)
-- [SQLite](https://github.com/sqlite/sqlite)
-- [sqlite_orm](https://github.com/fnc12/sqlite_orm)
-
-### Icons
-
-- [Solar Icon Set](https://www.figma.com/community/file/1166831539721848736)
+Binary releases are compiled automatically via GitHub Actions in the [Actions tab](https://github.com/greenyarik0505-jpg/AyuGramDesktop/actions).
