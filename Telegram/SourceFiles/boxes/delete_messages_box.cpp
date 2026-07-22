@@ -202,6 +202,12 @@ void DeleteMessagesBox::prepare() {
 			tr::lng_report_spam(tr::now),
 			false,
 			st::defaultBoxCheckbox);
+		// FluxGram: Keep locally — save deleted messages to local archive
+		_keepLocally.create(
+			this,
+			tr::lng_delete_keep_locally(tr::now),
+			false,
+			st::defaultBoxCheckbox);
 		if (_moderateDeleteAll) {
 			const auto search = lifetime().make_state<Api::MessagesSearch>(
 				_session->data().message(_ids.front())->history());
@@ -341,6 +347,9 @@ void DeleteMessagesBox::prepare() {
 				fullHeight += _banUser->heightNoMargins() + st::boxLittleSkip;
 			}
 			fullHeight += _reportSpam->heightNoMargins();
+			if (_keepLocally) {
+				fullHeight += st::boxLittleSkip + _keepLocally->heightNoMargins();
+			}
 			if (_deleteAll) {
 				fullHeight += st::boxLittleSkip + _deleteAll->heightNoMargins();
 			}
@@ -490,6 +499,10 @@ void DeleteMessagesBox::resizeEvent(QResizeEvent *e) {
 		}
 		_reportSpam->moveToLeft(padding.left(), top);
 		top += _reportSpam->heightNoMargins() + st::boxLittleSkip;
+		if (_keepLocally) {
+			_keepLocally->moveToLeft(padding.left(), top);
+			top += _keepLocally->heightNoMargins() + st::boxLittleSkip;
+		}
 		if (_deleteAll) {
 			const auto availableWidth = width() - 2 * padding.left();
 			_deleteAll->resizeToNaturalWidth(availableWidth);
