@@ -34,27 +34,6 @@ jobs:
       - name: Setup NASM
         uses: ilammy/setup-nasm@v1
 
-      - name: Clean environment PATH
-        shell: powershell
-        run: |
-          $env:PATH = ($env:PATH -split ';' | Where-Object { $_ -notlike '*mingw*' -and $_ -notlike '*gcc*' }) -join ';'
-          [Environment]::SetEnvironmentVariable('PATH', $env:PATH, 'Process')
-
-      - name: Cache Libraries
-        id: cache-libraries
-        uses: actions/cache@v4
-        with:
-          path: Libraries
-          key: ${{ runner.OS }}-libraries-v10-${{ hashFiles('Telegram/build/prepare/win.bat') }}
-
-      - name: Prepare Libraries (Non-Interactive)
-        if: steps.cache-libraries.outputs.cache-hit != 'true'
-        shell: cmd
-        run: |
-          mkdir Libraries
-          cd Libraries
-          echo N | call ..\Telegram\build\prepare\win.bat < nul
-
       - name: Configure CMake
         shell: cmd
         run: |
