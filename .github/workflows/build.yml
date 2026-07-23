@@ -9,7 +9,7 @@ jobs:
   windows:
     name: Windows x64
     runs-on: windows-2022
-    timeout-minutes: 360
+    timeout-minutes: 120
 
     steps:
       - name: Prepare git
@@ -45,35 +45,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: Libraries
-          key: ${{ runner.OS }}-libraries-v9-${{ hashFiles('Telegram/build/prepare/win.bat') }}
+          key: ${{ runner.OS }}-libraries-v10-${{ hashFiles('Telegram/build/prepare/win.bat') }}
 
-      - name: Robust Library Preparation with Auto-Retry
+      - name: Prepare Libraries (Non-Interactive)
         if: steps.cache-libraries.outputs.cache-hit != 'true'
-        shell: powershell
+        shell: cmd
         run: |
-          New-Item -ItemType Directory -Force Libraries
-          Set-Location Libraries
-          
-          $retryCount = 0
-          $success = $false
-          
-          while (-not $success -and $retryCount -lt 5) {
-            $retryCount++
-            Write-Host ">>> Preparing Libraries (Attempt $retryCount/5)..."
-            try {
-              $proc = Start-Process -FilePath "cmd.exe" -ArgumentList "/c call ..\Telegram\build\prepare\win.bat" -NoNewWindow -PassThru -Wait
-              if ($proc.ExitCode -eq 0) {
-                $success = $true
-                Write-Host ">>> Libraries prepared successfully!"
-              } else {
-                Write-Warning "Attempt $retryCount failed. Auto-repairing workspace..."
-                Get-ChildItem -Path . -Exclude "*.zip","*.tar.gz" -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-                Start-Sleep -Seconds 10
-              }
-            } catch {
-              Write-Warning "Error during library build attempt $retryCount: $_"
-            }
-          }
+          mkdir Libraries
+          cd Libraries
+          echo N | call ..\Telegram\build\prepare\win.bat < nul
 
       - name: Configure CMake
         shell: cmd
@@ -89,22 +69,10 @@ jobs:
             -DFLUXGRAM_VERSION=1 ^
             Telegram
 
-      - name: Auto-Repair & Build FluxGram
-        shell: powershell
+      - name: Build FluxGram
+        shell: cmd
         run: |
-          $buildSuccess = $false
-          for ($i = 1; $i -le 5; $i++) {
-            Write-Host ">>> Building FluxGram Target (Attempt $i/5)..."
-            $res = Start-Process -FilePath "cmake" -ArgumentList "--build build --config Release --target Telegram -- /m /nologo" -NoNewWindow -PassThru -Wait
-            if ($res.ExitCode -eq 0) {
-              $buildSuccess = $true
-              Write-Host ">>> FluxGram compiled successfully!"
-              break
-            } else {
-              Write-Warning "Build attempt $i failed. Retrying compilation..."
-              Start-Sleep -Seconds 10
-            }
-          }
+          cmake --build build --config Release --target Telegram -- /m /nologo
 
       - name: Collect artifacts
         shell: powershell
