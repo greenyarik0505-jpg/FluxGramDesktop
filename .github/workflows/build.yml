@@ -9,7 +9,7 @@ jobs:
   windows:
     name: Windows x64
     runs-on: windows-2022
-    timeout-minutes: 120
+    timeout-minutes: 180
 
     steps:
       - name: Prepare git
@@ -37,7 +37,7 @@ jobs:
       - name: Configure CMake
         shell: cmd
         run: |
-          cmake -B build ^
+          cmake -B build -S . ^
             -G "Visual Studio 17 2022" ^
             -A x64 ^
             -DCMAKE_BUILD_TYPE=Release ^
@@ -45,8 +45,7 @@ jobs:
             -DTDESKTOP_API_HASH=b18441a1ff607e10a989891a5462e627 ^
             -DDESKTOP_APP_USE_PACKAGED=OFF ^
             -DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON ^
-            -DFLUXGRAM_VERSION=1 ^
-            Telegram
+            -DFLUXGRAM_VERSION=1
 
       - name: Build FluxGram
         shell: cmd
