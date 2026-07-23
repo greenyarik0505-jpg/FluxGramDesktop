@@ -13,6 +13,7 @@ env:
   TDESKTOP_API_HASH: "b18441a1ff607e10a989891a5462e627"
 
 jobs:
+
   windows:
     name: Windows x64
     runs-on: windows-2022
@@ -44,11 +45,6 @@ jobs:
           minimum-size: 16GB
           maximum-size: 32GB
           disk-root: "C:"
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
 
       - name: Setup environment
         shell: bash
@@ -99,23 +95,20 @@ jobs:
           arch: x64
           sdk: ${{ env.SDK }}
 
-      - name: Setup NASM
-        uses: ilammy/setup-nasm@v1
-
       - name: NuGet sources
         run: |
           nuget sources Disable -Name "Microsoft Visual Studio Offline Packages"
           nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
 
       - name: ThirdParty cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ env.TBUILD }}/ThirdParty
           key: ${{ runner.OS }}-x64-third-party-${{ env.CACHE_KEY }}
           restore-keys: ${{ runner.OS }}-x64-third-party-
 
       - name: Libraries cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ${{ env.LibrariesPath }}/*
@@ -127,7 +120,7 @@ jobs:
           restore-keys: ${{ runner.OS }}-x64-libs-
 
       - name: Qt cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ${{ env.LibrariesPath }}/[qQ]t[_-]*
@@ -135,35 +128,116 @@ jobs:
           key: ${{ runner.OS }}-x64-qt-${{ env.CACHE_KEY }}
           restore-keys: ${{ runner.OS }}-x64-qt-
 
-      - name: Prepare Libraries
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Apply patches
+        shell: python
         run: |
-          cd "%TBUILD%\%REPO_NAME%"
-          python Telegram\build\prepare\prepare.py --arch x64
+          import os, sys, re
+          sys.stdout.reconfigure(encoding='utf-8')
+          src = os.path.join(os.environ["TBUILD"], os.environ["REPO_NAME"])
+          patched = {}
+
+          def patch(path, old, new):
+              full = os.path.join(src, path)
+              if not os.path.exists(full):
+                  return
+              with open(full, "r", encoding="utf-8") as f:
+                  content = f.read()
+              if old in content:
+                  with open(full, "w", encoding="utf-8", newline="\n") as f:
+                      f.write(content.replace(old, new))
+                  patched.setdefault(path, []).append(old[:60])
+
+          def patch_re(path, pattern, new):
+              full = os.path.join(src, path)
+              if not os.path.exists(full):
+                  return
+              with open(full, "r", encoding="utf-8") as f:
+                  content = f.read()
+              result, n = re.subn(pattern, new, content)
+              if n:
+                  with open(full, "w", encoding="utf-8", newline="\n") as f:
+                      f.write(result)
+                  patched.setdefault(path, []).append(f"regex:{pattern[:40]}")
+
+          patch("cmake/options_win.cmake", "/MP     # Enable multi process build.", "/MP\n        /FS")
+          patch_re("cmake/options_win.cmake", r'/DEBUG(?!\:NONE)', '/DEBUG:NONE')
+          patch("cmake/variables.cmake",
+                'set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "ProgramDatabase" CACHE STRING "")',
+                'set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "" CACHE STRING "" FORCE)')
+
+          p = "Telegram/build/prepare/prepare.py"
+          patch(p, "qt = os.environ.get('QT')", "qt = os.environ['QT']")
+          patch(p, 'move out.dbg\\ossl_static.pdb', 'if exist out.dbg echo skip')
+          patch(p, 'move out.dbg\\ossl_static', 'if exist out.dbg echo skip')
+          patch(p, 'SET CONFIGURATIONS=-debug-and-release', 'SET CONFIGURATIONS=-release')
+          patch(p, 'CONFIGURATIONS=-debug-and-release', 'CONFIGURATIONS=-release')
+          patch(p, 'cmake --build . --config Debug', 'echo skip')
+          patch(p, 'cmake --build out --config Debug', 'echo skip')
+          patch(p, 'cmake --install . --config Debug', 'echo skip')
+
+          for path, items in patched.items():
+              print(f"Patched {path}: {len(items)} replacement(s)")
+
+      - name: Build libraries
+        env:
+          GYP_MSVS_OVERRIDE_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
+          GYP_MSVS_VERSION: 2022
+        run: |
+          %TBUILD%\%REPO_NAME%\Telegram\build\prepare\win.bat silent
+
+      - name: Free disk space
+        shell: bash
+        run: |
+          if [ -d "$LibrariesPath" ]; then
+            find $LibrariesPath \
+              '(' \
+                '(' \
+                  ! '(' \
+                    -name '*.lib' -o -name '*.a' -o -name '*.exe' \
+                    -o -name '*.h' -o -name '*.hpp' -o -name '*.inc' \
+                    -o -name '*.cmake' -o -path '*/include/*' \
+                    -o -path '*/objects-*' -o -path '*/cache_keys/*' \
+                    -o -path '*/patches/*' \
+                  ')' \
+                  -type f \
+                ')' \
+                -o -empty \
+              ')' -delete
+          fi
 
       - name: Build FluxGram
         run: |
-          cd "%TBUILD%\%REPO_NAME%"
-          call configure.bat x64 ^
+          cd %TBUILD%\%REPO_NAME%\Telegram
+          call configure.bat ^
+            x64 ^
             -D TDESKTOP_API_ID=%TDESKTOP_API_ID% ^
             -D TDESKTOP_API_HASH=%TDESKTOP_API_HASH% ^
-            -D DESKTOP_APP_DISABLE_CRASH_REPORTS=ON
-          cmake --build out --config Release --target Telegram -- /m /nologo
+            -D CMAKE_CONFIGURATION_TYPES=Release ^
+            -D DESKTOP_APP_DISABLE_AUTOUPDATE=OFF ^
+            -D DESKTOP_APP_DISABLE_CRASH_REPORTS=ON ^
+            -D DESKTOP_APP_ENABLE_LTO=ON
+          cmake --build ..\out --config Release --parallel %NUMBER_OF_PROCESSORS%
 
-      - name: Collect artifacts
-        shell: powershell
+      - name: Package
+        shell: bash
         run: |
-          New-Item -ItemType Directory -Force dist
-          $outDir = "$env:TBUILD\$env:REPO_NAME\out\Release"
-          if (Test-Path "$outDir\Telegram.exe") {
-            Copy-Item "$outDir\Telegram.exe" "dist\FluxGram.exe" -Force
-          }
-          if (Test-Path "$outDir\Updater.exe") {
-            Copy-Item "$outDir\Updater.exe" "dist\Updater.exe" -Force
-          }
+          OUT="$TBUILD/$REPO_NAME/out/Release"
+          mkdir -p pkg
+          for f in FluxGram.exe Telegram.exe; do
+            [ -f "$OUT/$f" ] && cp "$OUT/$f" pkg/FluxGram.exe && break
+          done
+          [ -f "$OUT/Updater.exe" ] && cp "$OUT/Updater.exe" pkg/
+          find pkg -name '*.pdb' -o -name '*.ilk' -o -name '*.exp' | xargs rm -f 2>/dev/null || true
+          cd pkg && 7z a -mx9 "../FluxGram-Windows-x64-${VERSION}.zip" . > /dev/null
 
-      - name: Upload FluxGram Executable
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: FluxGram-Windows-x64
-          path: dist\
-          retention-days: 30
+          name: FluxGram-Windows-x64-${{ env.VERSION }}
+          path: "FluxGram-Windows-x64-${{ env.VERSION }}.zip"
+          retention-days: 90
