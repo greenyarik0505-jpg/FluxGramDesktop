@@ -5,62 +5,152 @@ on:
     branches: [ dev, main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+env:
+  TDESKTOP_API_ID: "2040"
+  TDESKTOP_API_HASH: "b18441a1ff607e10a989891a5462e627"
+
 jobs:
   windows:
     name: Windows x64
     runs-on: windows-2022
-    timeout-minutes: 180
+    timeout-minutes: 360
+
+    defaults:
+      run:
+        shell: cmd
 
     steps:
-      - name: Prepare git
-        run: git config --global core.autocrlf false
+      - name: Checkout builder repo
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4
-        name: Clone FluxGram
-        with:
-          submodules: recursive
-          fetch-depth: 0
-
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Setup NASM
-        uses: ilammy/setup-nasm@v1
-
-      - name: Configure CMake
-        shell: cmd
+      - name: Clean disk
         run: |
-          cmake -B build -S . ^
-            -G "Visual Studio 17 2022" ^
-            -A x64 ^
-            -DCMAKE_BUILD_TYPE=Release ^
-            -DTDESKTOP_API_ID=2040 ^
-            -DTDESKTOP_API_HASH=b18441a1ff607e10a989891a5462e627 ^
-            -DDESKTOP_APP_USE_PACKAGED=OFF ^
-            -DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON ^
-            -DFLUXGRAM_VERSION=1
+          if exist "C:\Program Files\Android" rmdir /s /q "C:\Program Files\Android"
+          if exist "C:\hostedtoolcache\windows" rmdir /s /q "C:\hostedtoolcache\windows"
+          if exist "C:\Program Files\dotnet" rmdir /s /q "C:\Program Files\dotnet"
+          if exist "C:\mysql" rmdir /s /q "C:\mysql"
+          net stop SQLWriter 2>nul || ver >nul
+          taskkill /F /IM sqlwriter.exe /T 2>nul || ver >nul
+          taskkill /F /IM sqlservr.exe /T 2>nul || ver >nul
+          if exist "C:\Program Files\Microsoft SQL Server" rmdir /s /q "C:\Program Files\Microsoft SQL Server"
+          exit /b 0
+
+      - name: Expand virtual memory
+        uses: al-cheb/configure-pagefile-action@v1.4
+        with:
+          minimum-size: 16GB
+          maximum-size: 32GB
+          disk-root: "C:"
+
+      - name: Setup environment
+        shell: bash
+        run: |
+          REPO_NAME="FluxGramDesktop"
+          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+
+          mkdir -p "$USERPROFILE/TBuild/Libraries"
+          echo "TBUILD=$GITHUB_WORKSPACE/TBuild" >> $GITHUB_ENV
+          echo "LibrariesPath=$GITHUB_WORKSPACE/TBuild/Libraries/x64" >> $GITHUB_ENV
+
+          SDK="10.0.26100.0"
+          echo "SDK=$SDK" >> $GITHUB_ENV
+
+          sed -i '/CMAKE_${lang}_FLAGS_DEBUG_INIT/s/${_Zi}//' \
+            "$PROGRAMFILES"/CMake/share/cmake*/Modules/Platform/Windows-MSVC.cmake
+
+          git config --global user.email "FluxGramBuilder@users.noreply.github.com"
+          git config --global user.name "FluxGram CI"
+
+      - name: Create TBuild symlink
+        run: mklink /d %GITHUB_WORKSPACE%\TBuild %userprofile%\TBuild
+
+      - name: Clone FluxGramDesktop
+        run: |
+          git clone --recursive --depth 1 --shallow-submodules --jobs %NUMBER_OF_PROCESSORS% ^
+            --branch "main" --filter=blob:none ^
+            https://github.com/greenyarik0505-jpg/FluxGramDesktop.git "%TBUILD%\%REPO_NAME%"
+        shell: cmd
+
+      - name: Read version
+        shell: bash
+        run: |
+          VFILE="$TBUILD/$REPO_NAME/Telegram/build/version"
+          VERSION=$(grep 'AppVersionStr ' "$VFILE" | awk '{ print $2 }')
+          VERSION_NUM=$(grep 'AppVersion ' "$VFILE" | awk '{ print $2 }')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "VERSION_NUM=$VERSION_NUM" >> $GITHUB_ENV
+
+          PREP="$TBUILD/$REPO_NAME/Telegram/build/prepare/prepare.py"
+          echo "$(sha256sum "$PREP" | awk '{ print $1 }')" > CACHE_KEY.txt
+          echo "$SDK" >> CACHE_KEY.txt
+          echo "CACHE_KEY=$(sha256sum CACHE_KEY.txt | awk '{ print $1 }')" >> $GITHUB_ENV
+
+      - name: MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1.13.0
+        with:
+          arch: x64
+          sdk: ${{ env.SDK }}
+
+      - name: NuGet sources
+        run: |
+          nuget sources Disable -Name "Microsoft Visual Studio Offline Packages"
+          nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
+
+      - name: ThirdParty cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.TBUILD }}/ThirdParty
+          key: ${{ runner.OS }}-x64-third-party-${{ env.CACHE_KEY }}
+          restore-keys: ${{ runner.OS }}-x64-third-party-
+
+      - name: Libraries cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.LibrariesPath }}/*
+            !${{ env.LibrariesPath }}/cache_keys
+            !${{ env.LibrariesPath }}/[qQ]t[_-]*
+            ${{ env.LibrariesPath }}/cache_keys/*
+            !${{ env.LibrariesPath }}/cache_keys/[qQ]t[_-]*
+          key: ${{ runner.OS }}-x64-libs-${{ env.CACHE_KEY }}
+          restore-keys: ${{ runner.OS }}-x64-libs-
+
+      - name: Qt cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.LibrariesPath }}/[qQ]t[_-]*
+            ${{ env.LibrariesPath }}/cache_keys/[qQ]t[_-]*
+          key: ${{ runner.OS }}-x64-qt-${{ env.CACHE_KEY }}
+          restore-keys: ${{ runner.OS }}-x64-qt-
+
+      - name: Prepare Libraries
+        run: |
+          cd "%TBUILD%\%REPO_NAME%"
+          python Telegram\build\prepare\prepare.py --arch x64
 
       - name: Build FluxGram
-        shell: cmd
         run: |
-          cmake --build build --config Release --target Telegram -- /m /nologo
+          cd "%TBUILD%\%REPO_NAME%"
+          call configure.bat x64 ^
+            -D TDESKTOP_API_ID=%TDESKTOP_API_ID% ^
+            -D TDESKTOP_API_HASH=%TDESKTOP_API_HASH% ^
+            -D DESKTOP_APP_DISABLE_CRASH_REPORTS=ON
+          cmake --build out --config Release --target Telegram -- /m /nologo
 
       - name: Collect artifacts
         shell: powershell
         run: |
           New-Item -ItemType Directory -Force dist
-          if (Test-Path "build\Release\Telegram.exe") {
-            Copy-Item "build\Release\Telegram.exe" "dist\FluxGram.exe" -Force
+          $outDir = "$env:TBUILD\$env:REPO_NAME\out\Release"
+          if (Test-Path "$outDir\Telegram.exe") {
+            Copy-Item "$outDir\Telegram.exe" "dist\FluxGram.exe" -Force
           }
-          if (Test-Path "build\Release\Updater.exe") {
-            Copy-Item "build\Release\Updater.exe" "dist\Updater.exe" -Force
+          if (Test-Path "$outDir\Updater.exe") {
+            Copy-Item "$outDir\Updater.exe" "dist\Updater.exe" -Force
           }
 
       - name: Upload FluxGram Executable
