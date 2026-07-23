@@ -45,6 +45,11 @@ jobs:
           maximum-size: 32GB
           disk-root: "C:"
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Setup environment
         shell: bash
         run: |
@@ -93,6 +98,9 @@ jobs:
         with:
           arch: x64
           sdk: ${{ env.SDK }}
+
+      - name: Setup NASM
+        uses: ilammy/setup-nasm@v1
 
       - name: NuGet sources
         run: |
