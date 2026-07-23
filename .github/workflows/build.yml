@@ -27,10 +27,21 @@ jobs:
       - name: Checkout builder repo
         uses: actions/checkout@v4
 
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            make
+            diffutils
+            gperf
+            nasm
+            yasm
+
       - name: Clean disk
         run: |
           if exist "C:\Program Files\Android" rmdir /s /q "C:\Program Files\Android"
-          if exist "C:\hostedtoolcache\windows" rmdir /s /q "C:\hostedtoolcache\windows"
           if exist "C:\Program Files\dotnet" rmdir /s /q "C:\Program Files\dotnet"
           if exist "C:\mysql" rmdir /s /q "C:\mysql"
           net stop SQLWriter 2>nul || ver >nul
@@ -101,14 +112,14 @@ jobs:
           nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
 
       - name: ThirdParty cache
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: ${{ env.TBUILD }}/ThirdParty
           key: ${{ runner.OS }}-x64-third-party-${{ env.CACHE_KEY }}
           restore-keys: ${{ runner.OS }}-x64-third-party-
 
       - name: Libraries cache
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.LibrariesPath }}/*
@@ -120,7 +131,7 @@ jobs:
           restore-keys: ${{ runner.OS }}-x64-libs-
 
       - name: Qt cache
-        uses: actions/cache@v5
+        uses: actions/cache@v4
         with:
           path: |
             ${{ env.LibrariesPath }}/[qQ]t[_-]*
@@ -189,26 +200,6 @@ jobs:
           GYP_MSVS_VERSION: 2022
         run: |
           %TBUILD%\%REPO_NAME%\Telegram\build\prepare\win.bat silent
-
-      - name: Free disk space
-        shell: bash
-        run: |
-          if [ -d "$LibrariesPath" ]; then
-            find $LibrariesPath \
-              '(' \
-                '(' \
-                  ! '(' \
-                    -name '*.lib' -o -name '*.a' -o -name '*.exe' \
-                    -o -name '*.h' -o -name '*.hpp' -o -name '*.inc' \
-                    -o -name '*.cmake' -o -path '*/include/*' \
-                    -o -path '*/objects-*' -o -path '*/cache_keys/*' \
-                    -o -path '*/patches/*' \
-                  ')' \
-                  -type f \
-                ')' \
-                -o -empty \
-              ')' -delete
-          fi
 
       - name: Build FluxGram
         run: |
