@@ -1,234 +1,46 @@
-name: Build FluxGram Windows
+name: Build FluxGram Desktop
 
 on:
   push:
-    branches: [ dev, main ]
+    tags:
+      - 'v*'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
-env:
-  TDESKTOP_API_ID: "2040"
-  TDESKTOP_API_HASH: "b18441a1ff607e10a989891a5462e627"
-
 jobs:
-
-  windows:
-    name: Windows x64
-    runs-on: windows-2022
-    timeout-minutes: 360
-
-    defaults:
-      run:
-        shell: cmd
+  build:
+    runs-on: windows-latest
 
     steps:
-      - name: Checkout builder repo
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
-        with:
-          msystem: MINGW64
-          update: true
-          install: >-
-            make
-            diffutils
-            gperf
-            nasm
-            yasm
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
-      - name: Clean disk
-        run: |
-          if exist "C:\Program Files\Android" rmdir /s /q "C:\Program Files\Android"
-          if exist "C:\Program Files\dotnet" rmdir /s /q "C:\Program Files\dotnet"
-          if exist "C:\mysql" rmdir /s /q "C:\mysql"
-          net stop SQLWriter 2>nul || ver >nul
-          taskkill /F /IM sqlwriter.exe /T 2>nul || ver >nul
-          taskkill /F /IM sqlservr.exe /T 2>nul || ver >nul
-          if exist "C:\Program Files\Microsoft SQL Server" rmdir /s /q "C:\Program Files\Microsoft SQL Server"
-          exit /b 0
+    - name: Setup MSVC environment
+      uses: llvm/actions/setup-compilers@v1
 
-      - name: Expand virtual memory
-        uses: al-cheb/configure-pagefile-action@v1.4
-        with:
-          minimum-size: 16GB
-          maximum-size: 32GB
-          disk-root: "C:"
+    - name: Build FluxGram Desktop
+      shell: powershell
+      run: |
+        $vcvars = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        cmd /c "`"$vcvars`" && cmake -B build -G `"Visual Studio 17 2022`" -A x64 -DCMAKE_BUILD_TYPE=Release -DTDESKTOP_API_ID=2040 -DTDESKTOP_API_HASH=b18441a1ff607e10a989891a5462e627 -DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON && cmake --build build --config Release --target Telegram -- /m:12 /nologo"
+        Copy-Item "build/Release/AyuGram.exe" "FluxGram.exe" -Force
 
-      - name: Setup environment
-        shell: bash
-        run: |
-          REPO_NAME="FluxGramDesktop"
-          echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+    - name: Compile Inno Setup Installer
+      shell: powershell
+      run: |
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" "FluxGramSetup.iss"
 
-          mkdir -p "$USERPROFILE/TBuild/Libraries"
-          echo "TBUILD=$GITHUB_WORKSPACE/TBuild" >> $GITHUB_ENV
-          echo "LibrariesPath=$GITHUB_WORKSPACE/TBuild/Libraries/x64" >> $GITHUB_ENV
-
-          SDK="10.0.26100.0"
-          echo "SDK=$SDK" >> $GITHUB_ENV
-
-          sed -i '/CMAKE_${lang}_FLAGS_DEBUG_INIT/s/${_Zi}//' \
-            "$PROGRAMFILES"/CMake/share/cmake*/Modules/Platform/Windows-MSVC.cmake
-
-          git config --global user.email "FluxGramBuilder@users.noreply.github.com"
-          git config --global user.name "FluxGram CI"
-
-      - name: Create TBuild symlink
-        run: mklink /d %GITHUB_WORKSPACE%\TBuild %userprofile%\TBuild
-
-      - name: Clone FluxGramDesktop
-        run: |
-          git clone --recursive --depth 1 --shallow-submodules --jobs %NUMBER_OF_PROCESSORS% ^
-            --branch "main" --filter=blob:none ^
-            https://github.com/greenyarik0505-jpg/FluxGramDesktop.git "%TBUILD%\%REPO_NAME%"
-        shell: cmd
-
-      - name: Read version
-        shell: bash
-        run: |
-          VFILE="$TBUILD/$REPO_NAME/Telegram/build/version"
-          VERSION=$(grep 'AppVersionStr ' "$VFILE" | awk '{ print $2 }')
-          VERSION_NUM=$(grep 'AppVersion ' "$VFILE" | awk '{ print $2 }')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "VERSION_NUM=$VERSION_NUM" >> $GITHUB_ENV
-
-          PREP="$TBUILD/$REPO_NAME/Telegram/build/prepare/prepare.py"
-          echo "$(sha256sum "$PREP" | awk '{ print $1 }')" > CACHE_KEY.txt
-          echo "$SDK" >> CACHE_KEY.txt
-          echo "CACHE_KEY=$(sha256sum CACHE_KEY.txt | awk '{ print $1 }')" >> $GITHUB_ENV
-
-      - name: MSVC environment
-        uses: ilammy/msvc-dev-cmd@v1.13.0
-        with:
-          arch: x64
-          sdk: ${{ env.SDK }}
-
-      - name: NuGet sources
-        run: |
-          nuget sources Disable -Name "Microsoft Visual Studio Offline Packages"
-          nuget sources Add -Source https://api.nuget.org/v3/index.json & exit 0
-
-      - name: ThirdParty cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.TBUILD }}/ThirdParty
-          key: ${{ runner.OS }}-x64-third-party-${{ env.CACHE_KEY }}
-          restore-keys: ${{ runner.OS }}-x64-third-party-
-
-      - name: Libraries cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.LibrariesPath }}/*
-            !${{ env.LibrariesPath }}/cache_keys
-            !${{ env.LibrariesPath }}/[qQ]t[_-]*
-            ${{ env.LibrariesPath }}/cache_keys/*
-            !${{ env.LibrariesPath }}/cache_keys/[qQ]t[_-]*
-          key: ${{ runner.OS }}-x64-libs-${{ env.CACHE_KEY }}
-          restore-keys: ${{ runner.OS }}-x64-libs-
-
-      - name: Qt cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ${{ env.LibrariesPath }}/[qQ]t[_-]*
-            ${{ env.LibrariesPath }}/cache_keys/[qQ]t[_-]*
-          key: ${{ runner.OS }}-x64-qt-${{ env.CACHE_KEY }}
-          restore-keys: ${{ runner.OS }}-x64-qt-
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Apply patches
-        shell: python
-        run: |
-          import os, sys, re
-          sys.stdout.reconfigure(encoding='utf-8')
-          src = os.path.join(os.environ["TBUILD"], os.environ["REPO_NAME"])
-          patched = {}
-
-          def patch(path, old, new):
-              full = os.path.join(src, path)
-              if not os.path.exists(full):
-                  return
-              with open(full, "r", encoding="utf-8") as f:
-                  content = f.read()
-              if old in content:
-                  with open(full, "w", encoding="utf-8", newline="\n") as f:
-                      f.write(content.replace(old, new))
-                  patched.setdefault(path, []).append(old[:60])
-
-          def patch_re(path, pattern, new):
-              full = os.path.join(src, path)
-              if not os.path.exists(full):
-                  return
-              with open(full, "r", encoding="utf-8") as f:
-                  content = f.read()
-              result, n = re.subn(pattern, new, content)
-              if n:
-                  with open(full, "w", encoding="utf-8", newline="\n") as f:
-                      f.write(result)
-                  patched.setdefault(path, []).append(f"regex:{pattern[:40]}")
-
-          patch("cmake/options_win.cmake", "/MP     # Enable multi process build.", "/MP\n        /FS")
-          patch_re("cmake/options_win.cmake", r'/DEBUG(?!\:NONE)', '/DEBUG:NONE')
-          patch("cmake/variables.cmake",
-                'set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "ProgramDatabase" CACHE STRING "")',
-                'set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "" CACHE STRING "" FORCE)')
-
-          p = "Telegram/build/prepare/prepare.py"
-          patch(p, "qt = os.environ.get('QT')", "qt = os.environ['QT']")
-          patch(p, 'move out.dbg\\ossl_static.pdb', 'if exist out.dbg echo skip')
-          patch(p, 'move out.dbg\\ossl_static', 'if exist out.dbg echo skip')
-          patch(p, 'SET CONFIGURATIONS=-debug-and-release', 'SET CONFIGURATIONS=-release')
-          patch(p, 'CONFIGURATIONS=-debug-and-release', 'CONFIGURATIONS=-release')
-          patch(p, 'cmake --build . --config Debug', 'echo skip')
-          patch(p, 'cmake --build out --config Debug', 'echo skip')
-          patch(p, 'cmake --install . --config Debug', 'echo skip')
-
-          for path, items in patched.items():
-              print(f"Patched {path}: {len(items)} replacement(s)")
-
-      - name: Build libraries
-        env:
-          GYP_MSVS_OVERRIDE_PATH: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\'
-          GYP_MSVS_VERSION: 2022
-        run: |
-          %TBUILD%\%REPO_NAME%\Telegram\build\prepare\win.bat silent
-
-      - name: Build FluxGram
-        run: |
-          cd %TBUILD%\%REPO_NAME%\Telegram
-          call configure.bat ^
-            x64 ^
-            -D TDESKTOP_API_ID=%TDESKTOP_API_ID% ^
-            -D TDESKTOP_API_HASH=%TDESKTOP_API_HASH% ^
-            -D CMAKE_CONFIGURATION_TYPES=Release ^
-            -D DESKTOP_APP_DISABLE_AUTOUPDATE=OFF ^
-            -D DESKTOP_APP_DISABLE_CRASH_REPORTS=ON ^
-            -D DESKTOP_APP_ENABLE_LTO=ON
-          cmake --build ..\out --config Release --parallel %NUMBER_OF_PROCESSORS%
-
-      - name: Package
-        shell: bash
-        run: |
-          OUT="$TBUILD/$REPO_NAME/out/Release"
-          mkdir -p pkg
-          for f in FluxGram.exe Telegram.exe; do
-            [ -f "$OUT/$f" ] && cp "$OUT/$f" pkg/FluxGram.exe && break
-          done
-          [ -f "$OUT/Updater.exe" ] && cp "$OUT/Updater.exe" pkg/
-          find pkg -name '*.pdb' -o -name '*.ilk' -o -name '*.exp' | xargs rm -f 2>/dev/null || true
-          cd pkg && 7z a -mx9 "../FluxGram-Windows-x64-${VERSION}.zip" . > /dev/null
-
-      - name: Upload
-        uses: actions/upload-artifact@v4
-        with:
-          name: FluxGram-Windows-x64-${{ env.VERSION }}
-          path: "FluxGram-Windows-x64-${{ env.VERSION }}.zip"
-          retention-days: 90
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          FluxGramSetup.exe
+          FluxGram.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
