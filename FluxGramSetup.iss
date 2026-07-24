@@ -4,17 +4,17 @@ AppVersion=1.0.13
 AppPublisher=FluxGram Team
 AppPublisherURL=https://github.com/greenyarik0505-jpg/FluxGramDesktop
 DefaultDirName={autopf}\FluxGram
-DefaultGroupName=FluxGram
+DefaultGroupName=FluxGram Desktop
 UninstallDisplayIcon={app}\icon256.ico
-SetupIconFile=D:\yarikgram\ayugram-desktop\Telegram\Resources\art\icon256.ico
+SetupIconFile=Telegram\Resources\art\icon256.ico
 Compression=lzma2/max
 SolidCompression=yes
-OutputDir=D:\yarikgram\ayugram-desktop
+OutputDir=.
 OutputBaseFilename=FluxGramSetup
 
 [Files]
-Source: "D:\yarikgram\ayugram-desktop\FluxGram.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\yarikgram\ayugram-desktop\Telegram\Resources\art\icon256.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "FluxGram.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Telegram\Resources\art\icon256.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\FluxGram Desktop"; Filename: "{app}\FluxGram.exe"; IconFilename: "{app}\icon256.ico"; WorkingDir: "{app}"; AppUserModelID: "FluxGram.FluxGramDesktop"
