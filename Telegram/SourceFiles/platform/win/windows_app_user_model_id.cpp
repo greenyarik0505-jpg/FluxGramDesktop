@@ -14,6 +14,7 @@ https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 
 #include <propvarutil.h>
 #include <propkey.h>
+#include <Shlobj.h>
 
 namespace Platform {
 namespace AppUserModelId {
@@ -483,7 +484,8 @@ bool ValidateShortcut() {
 		return false;
 	}
 
-	LOG(("App Info: Shortcut created and validated at \"%1\"").arg(path));
+	SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);
+	LOG(("App Info: Shortcut auto-healed and validated at \"%1\"").arg(path));
 	return true;
 }
 
