@@ -12,7 +12,7 @@
 
 using namespace sqlite_orm;
 auto storage = make_storage(
-	"./tdata/ayudata.db",
+	"./tdata/fluxgramdata.db",
 	make_table<SchemaVersion>(
 		"SchemaVersion",
 		make_column("id", &SchemaVersion::id, primary_key()),

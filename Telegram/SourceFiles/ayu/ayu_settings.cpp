@@ -28,7 +28,7 @@ using json = nlohmann::json;
 namespace {
 
 std::string getSettingsPath() {
-	return (cWorkingDir() + u"tdata/ayu_settings.json"_q).toStdString();
+	return (cWorkingDir() + u"tdata/fluxgram_settings.json"_q).toStdString();
 }
 
 void repaintApp() {
