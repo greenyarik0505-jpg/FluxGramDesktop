@@ -330,6 +330,8 @@ bool validateShortcutAt(const QString &path) {
 	hr = propertyStore->Commit();
 	if (!SUCCEEDED(hr)) return false;
 
+	shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
+
 	if (persistFile->IsDirty() == S_OK) {
 		hr = persistFile->Save(native.c_str(), TRUE);
 		if (!SUCCEEDED(hr)) return false;
