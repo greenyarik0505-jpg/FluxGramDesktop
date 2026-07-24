@@ -53,7 +53,7 @@ const std::wstring &MyExecutablePath() {
 		if (!length || length == kMaxFileLen) {
 			result.clear();
 		} else {
-			result.resize(length + 1);
+			result.resize(length);
 		}
 		return result;
 	}();
@@ -303,6 +303,7 @@ bool validateShortcutAt(const QString &path) {
 	PropVariantClear(&toastActivatorPropVar);
 	if (good1 && good2) {
 		shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
+		persistFile->Save(native.c_str(), TRUE);
 		LOG(("App Info: Shortcut validated at \"%1\"").arg(path));
 		return true;
 	} else if (bad1 || bad2) {
@@ -349,8 +350,8 @@ bool checkInstalled(QString path = {}) {
 		}
 	}
 
-	const auto installed = u"FluxGram Desktop/FluxGram.lnk"_q;
-	const auto old = u"FluxGram for Windows/FluxGram.lnk"_q;
+	const auto installed = u"FluxGram Desktop/FluxGram Desktop.lnk"_q;
+	const auto old = u"FluxGram Desktop/FluxGram.lnk"_q;
 	return validateShortcutAt(path + installed)
 		|| validateShortcutAt(path + old);
 }

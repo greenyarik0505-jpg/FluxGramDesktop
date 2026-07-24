@@ -32,11 +32,15 @@ void loadAppIco() {
 
 	auto f = QFile(iconPath);
 	if (f.exists()) {
-		f.setPermissions(QFile::WriteOther);
+		f.setPermissions(QFile::WriteUser | QFile::ReadUser);
 		f.remove();
 	}
 	f.close();
-	QFile::copy(qsl(":/gui/art/icon256.ico"), iconPath);
+	if (QFile::exists(qsl(":/gui/art/ayu/%1/app_icon.ico").arg(settings.appIcon()))) {
+		QFile::copy(qsl(":/gui/art/ayu/%1/app_icon.ico").arg(settings.appIcon()), iconPath);
+	} else {
+		QFile::copy(qsl(":/gui/art/icon256.ico"), iconPath);
+	}
 }
 
 QImage CreateRaster(
@@ -46,7 +50,7 @@ QImage CreateRaster(
 	const auto iconSize = resultImageSize.shrunkBy(
 		QMargins(padding, padding, padding, padding));
 	const auto loaded = QImage(source).scaled(
-		iconSize,
+		iconSize * style::DevicePixelRatio(),
 		Qt::KeepAspectRatio,
 		Qt::SmoothTransformation);
 	auto res = QImage(
@@ -58,12 +62,10 @@ QImage CreateRaster(
 		auto p = QPainter(&res);
 		p.setRenderHint(QPainter::Antialiasing, true);
 		p.setRenderHint(QPainter::SmoothPixmapTransform, true);
-		const auto targetRect = QRect(
-			padding + (iconSize.width() - loaded.width() / style::DevicePixelRatio()) / 2,
-			padding + (iconSize.height() - loaded.height() / style::DevicePixelRatio()) / 2,
-			loaded.width() / style::DevicePixelRatio(),
-			loaded.height() / style::DevicePixelRatio());
-		p.drawImage(targetRect, loaded);
+		const auto targetLogical = iconSize;
+		const auto x = padding + (resultImageSize.width() - 2 * padding - targetLogical.width()) / 2;
+		const auto y = padding + (resultImageSize.height() - 2 * padding - targetLogical.height()) / 2;
+		p.drawImage(QRect(x, y, targetLogical.width(), targetLogical.height()), loaded);
 	}
 	return res;
 }
@@ -93,10 +95,12 @@ QImage currentAppLogo(const QSize &size) {
 	if (LAST_LOADED.isNull()) {
 		LAST_LOADED = CreateImage(settings.appIcon(), QSize(256, 256));
 	}
-	return LAST_LOADED.scaled(
+	auto scaled = LAST_LOADED.scaled(
 		size * style::DevicePixelRatio(),
 		Qt::KeepAspectRatio,
 		Qt::SmoothTransformation);
+	scaled.setDevicePixelRatio(style::DevicePixelRatio());
+	return scaled;
 }
 
 QImage currentAppLogoWithPadding(const QSize &size) {
@@ -109,10 +113,12 @@ QImage currentAppLogoWithPadding(const QSize &size) {
 	if (LAST_LOADED_PAD.isNull()) {
 		LAST_LOADED_PAD = CreateImage(settings.appIcon(), QSize(256, 256), st::ayu_logo_padding);
 	}
-	return LAST_LOADED_PAD.scaled(
+	auto scaled = LAST_LOADED_PAD.scaled(
 		size * style::DevicePixelRatio(),
 		Qt::KeepAspectRatio,
 		Qt::SmoothTransformation);
+	scaled.setDevicePixelRatio(style::DevicePixelRatio());
+	return scaled;
 }
 
 } // namespace AyuAssets
