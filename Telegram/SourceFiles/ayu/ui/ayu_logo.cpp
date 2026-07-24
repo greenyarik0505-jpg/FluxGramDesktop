@@ -36,12 +36,9 @@ void loadAppIco() {
 		f.remove();
 	}
 	f.close();
-	QFile::copy(qsl(":/gui/art/ayu/%1/app_icon.ico").arg(settings.appIcon()), iconPath);
+	QFile::copy(qsl(":/gui/art/icon256.ico"), iconPath);
 }
 
-// Draws a raster image (PNG/JPEG/any Qt-supported format or resource) centered
-// into a transparent canvas of the requested size. Used both for bundled
-// raster icons and for the guaranteed fallback logo.
 QImage CreateRaster(
 		const QString &source,
 		const QSize resultImageSize,
@@ -59,88 +56,58 @@ QImage CreateRaster(
 	res.fill(Qt::transparent);
 	if (!loaded.isNull()) {
 		auto p = QPainter(&res);
-		p.drawImage(
-			QRect(padding, padding, iconSize.width(), iconSize.height()),
-			loaded);
+		p.setRenderHint(QPainter::Antialiasing, true);
+		p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+		const auto targetRect = QRect(
+			padding + (iconSize.width() - loaded.width() / style::DevicePixelRatio()) / 2,
+			padding + (iconSize.height() - loaded.height() / style::DevicePixelRatio()) / 2,
+			loaded.width() / style::DevicePixelRatio(),
+			loaded.height() / style::DevicePixelRatio());
+		p.drawImage(targetRect, loaded);
 	}
 	return res;
 }
 
 QImage CreateImage(const QString &name, const QSize resultImageSize, const int padding = 0) {
-	const auto iconSize = resultImageSize.shrunkBy(QMargins(padding, padding, padding, padding));
-
-	// Guarantees the app never shows a blank icon if a theme asset is missing
-	// or mislabeled (some bundled "*.svg" files are actually raster images).
-	const auto fallback = qsl(":/gui/art/logo_256.png");
-
-	const auto pngPath = qsl(":/gui/art/ayu/%1/app.png").arg(name);
+	const auto pngPath = qsl(":/gui/art/icon512.png");
 	if (QFile::exists(pngPath) && !QImage(pngPath).isNull()) {
 		return CreateRaster(pngPath, resultImageSize, padding);
 	}
 
-	const auto svgPath = qsl(":/gui/art/ayu/%1/app.svg").arg(name);
-	if (QFile::exists(svgPath)) {
-		auto svg = QSvgRenderer(svgPath);
-		if (svg.isValid()) {
-			auto image = QImage(
-				resultImageSize * style::DevicePixelRatio(),
-				QImage::Format_ARGB32_Premultiplied);
-			image.setDevicePixelRatio(style::DevicePixelRatio());
-			image.fill(Qt::transparent);
-			{
-				auto p = QPainter(&image);
-
-				QPainterPath path;
-				path.addRoundedRect(
-					QRect(padding, padding, iconSize.width(), iconSize.height()),
-					iconSize.width() / 2.0f,
-					iconSize.height() / 2.0f
-				);
-
-				p.save();
-
-				p.setRenderHint(QPainter::Antialiasing, true);
-				p.setClipPath(path);
-				p.setRenderHint(QPainter::Antialiasing, false);
-
-				svg.render(&p, QRect(padding, padding, iconSize.width(), iconSize.height()));
-
-				p.restore();
-			}
-			return image;
-		}
-	}
-
-	// Missing or non-SVG asset (e.g. a JPEG mislabeled as .svg) — fall back to
-	// the guaranteed-valid bundled FluxGram logo instead of a blank icon.
+	const auto fallback = qsl(":/gui/art/logo_256.png");
 	return CreateRaster(fallback, resultImageSize, padding);
 }
 
-void loadIcons() {
+QImage currentAppLogo(const QSize &size) {
 	const auto &settings = AyuSettings::getInstance();
 	if (LAST_LOADED_NAME != settings.appIcon()) {
 		LAST_LOADED_NAME = settings.appIcon();
-		LAST_LOADED = CreateImage(settings.appIcon(), Size(256));
-		LAST_LOADED_PAD = CreateImage(settings.appIcon(), Size(256), 12);
+		LAST_LOADED = QImage();
+		LAST_LOADED_PAD = QImage();
 	}
+	if (LAST_LOADED.isNull()) {
+		LAST_LOADED = CreateImage(settings.appIcon(), QSize(256, 256));
+	}
+	return LAST_LOADED.scaled(
+		size * style::DevicePixelRatio(),
+		Qt::KeepAspectRatio,
+		Qt::SmoothTransformation);
 }
 
-QImage loadPreview(const QString &name) {
-	return CreateImage(name, Size(st::iconPickerIconSize), st::iconPickerImagePadding);
+QImage currentAppLogoWithPadding(const QSize &size) {
+	const auto &settings = AyuSettings::getInstance();
+	if (LAST_LOADED_NAME != settings.appIcon()) {
+		LAST_LOADED_NAME = settings.appIcon();
+		LAST_LOADED = QImage();
+		LAST_LOADED_PAD = QImage();
+	}
+	if (LAST_LOADED_PAD.isNull()) {
+		LAST_LOADED_PAD = CreateImage(settings.appIcon(), QSize(256, 256), st::ayu_logo_padding);
+	}
+	return LAST_LOADED_PAD.scaled(
+		size * style::DevicePixelRatio(),
+		Qt::KeepAspectRatio,
+		Qt::SmoothTransformation);
 }
 
-QString currentAppLogoName() {
-	return LAST_LOADED_NAME;
-}
-
-QImage currentAppLogo() {
-	loadIcons();
-	return LAST_LOADED;
-}
-
-QImage currentAppLogoPad() {
-	loadIcons();
-	return LAST_LOADED_PAD;
-}
-
-}
+} // namespace AyuAssets
