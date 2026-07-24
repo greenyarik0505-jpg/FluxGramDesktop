@@ -182,6 +182,7 @@ void CheckPinned() {
 				hr = propertyStore->Commit();
 				if (!SUCCEEDED(hr)) return;
 
+				shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
 				if (persistFile->IsDirty() == S_OK) {
 					persistFile->Save(fname.c_str(), TRUE);
 				}
@@ -383,6 +384,8 @@ bool ValidateShortcut() {
 	if (!SUCCEEDED(hr)) {
 		return false;
 	}
+
+	shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
 
 	hr = shellLink->SetArguments(L"");
 	if (!SUCCEEDED(hr)) {
