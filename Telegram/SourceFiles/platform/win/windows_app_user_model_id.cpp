@@ -150,42 +150,56 @@ void CheckPinned() {
 			if (GetUniqueFileId(dst) == srcid) {
 				auto propertyStore = shellLink.try_as<IPropertyStore>();
 				if (!propertyStore) {
+					FindClose(findHandle);
 					return;
 				}
 
 				PROPVARIANT appIdPropVar;
 				hr = propertyStore->GetValue(Key(), &appIdPropVar);
-				if (!SUCCEEDED(hr)) return;
+				if (!SUCCEEDED(hr)) {
+					FindClose(findHandle);
+					return;
+				}
 				LOG(("Reading..."));
 				WCHAR already[MAX_PATH];
 				hr = PropVariantToString(appIdPropVar, already, MAX_PATH);
-				if (SUCCEEDED(hr)) {
-					if (Id() == already) {
-						LOG(("Already!"));
-						PropVariantClear(&appIdPropVar);
-						return;
-					}
-				}
-				if (appIdPropVar.vt != VT_EMPTY) {
-					PropVariantClear(&appIdPropVar);
-					return;
-				}
+				const bool sameId = (SUCCEEDED(hr) && (Id() == already));
 				PropVariantClear(&appIdPropVar);
 
+				if (sameId) {
+					LOG(("Already!"));
+					shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
+					if (persistFile->IsDirty() == S_OK) {
+						persistFile->Save(fname.c_str(), TRUE);
+					}
+					FindClose(findHandle);
+					return;
+				}
+
 				hr = InitPropVariantFromString(Id().c_str(), &appIdPropVar);
-				if (!SUCCEEDED(hr)) return;
+				if (!SUCCEEDED(hr)) {
+					FindClose(findHandle);
+					return;
+				}
 
 				hr = propertyStore->SetValue(Key(), appIdPropVar);
 				PropVariantClear(&appIdPropVar);
-				if (!SUCCEEDED(hr)) return;
+				if (!SUCCEEDED(hr)) {
+					FindClose(findHandle);
+					return;
+				}
 
 				hr = propertyStore->Commit();
-				if (!SUCCEEDED(hr)) return;
+				if (!SUCCEEDED(hr)) {
+					FindClose(findHandle);
+					return;
+				}
 
 				shellLink->SetIconLocation(MyExecutablePath().c_str(), 0);
 				if (persistFile->IsDirty() == S_OK) {
 					persistFile->Save(fname.c_str(), TRUE);
 				}
+				FindClose(findHandle);
 				return;
 			}
 		}

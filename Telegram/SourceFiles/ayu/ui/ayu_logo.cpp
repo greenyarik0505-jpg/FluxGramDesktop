@@ -13,6 +13,7 @@
 #include <QSvgRenderer>
 
 static QString LAST_LOADED_NAME;
+static float64 LAST_LOADED_DPR = 0.0;
 static QImage LAST_LOADED;
 static QImage LAST_LOADED_PAD;
 
@@ -87,8 +88,10 @@ QImage CreateImage(const QString &name, const QSize resultImageSize, const int p
 
 QImage currentAppLogo(const QSize &size) {
 	const auto &settings = AyuSettings::getInstance();
-	if (LAST_LOADED_NAME != settings.appIcon()) {
+	const auto dpr = style::DevicePixelRatio();
+	if (LAST_LOADED_NAME != settings.appIcon() || LAST_LOADED_DPR != dpr) {
 		LAST_LOADED_NAME = settings.appIcon();
+		LAST_LOADED_DPR = dpr;
 		LAST_LOADED = QImage();
 		LAST_LOADED_PAD = QImage();
 	}
@@ -96,17 +99,19 @@ QImage currentAppLogo(const QSize &size) {
 		LAST_LOADED = CreateImage(settings.appIcon(), QSize(256, 256));
 	}
 	auto scaled = LAST_LOADED.scaled(
-		size * style::DevicePixelRatio(),
+		size * dpr,
 		Qt::KeepAspectRatio,
 		Qt::SmoothTransformation);
-	scaled.setDevicePixelRatio(style::DevicePixelRatio());
+	scaled.setDevicePixelRatio(dpr);
 	return scaled;
 }
 
 QImage currentAppLogoWithPadding(const QSize &size) {
 	const auto &settings = AyuSettings::getInstance();
-	if (LAST_LOADED_NAME != settings.appIcon()) {
+	const auto dpr = style::DevicePixelRatio();
+	if (LAST_LOADED_NAME != settings.appIcon() || LAST_LOADED_DPR != dpr) {
 		LAST_LOADED_NAME = settings.appIcon();
+		LAST_LOADED_DPR = dpr;
 		LAST_LOADED = QImage();
 		LAST_LOADED_PAD = QImage();
 	}
@@ -114,10 +119,10 @@ QImage currentAppLogoWithPadding(const QSize &size) {
 		LAST_LOADED_PAD = CreateImage(settings.appIcon(), QSize(256, 256), st::ayu_logo_padding);
 	}
 	auto scaled = LAST_LOADED_PAD.scaled(
-		size * style::DevicePixelRatio(),
+		size * dpr,
 		Qt::KeepAspectRatio,
 		Qt::SmoothTransformation);
-	scaled.setDevicePixelRatio(style::DevicePixelRatio());
+	scaled.setDevicePixelRatio(dpr);
 	return scaled;
 }
 
