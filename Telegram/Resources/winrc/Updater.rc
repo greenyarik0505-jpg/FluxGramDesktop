@@ -1,6 +1,5 @@
 // Microsoft Visual C++ generated resource script.
 //
-
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -51,11 +50,11 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "CompanyName", "Radolyn Labs"
-            VALUE "FileDescription", "AyuGram Desktop Updater"
+            VALUE "CompanyName", "FluxGram Team"
+            VALUE "FileDescription", "FluxGram Desktop Updater"
             VALUE "FileVersion", "6.7.8.0"
             VALUE "LegalCopyright", "Copyright (C) 2014-2026"
-            VALUE "ProductName", "AyuGram Desktop"
+            VALUE "ProductName", "FluxGram Desktop"
             VALUE "ProductVersion", "6.7.8.0"
         END
     END

@@ -69,6 +69,11 @@ QImage CreateRaster(
 }
 
 QImage CreateImage(const QString &name, const QSize resultImageSize, const int padding = 0) {
+	const auto customPng = qsl(":/gui/art/ayu/%1/app.png").arg(name);
+	if (QFile::exists(customPng) && !QImage(customPng).isNull()) {
+		return CreateRaster(customPng, resultImageSize, padding);
+	}
+
 	const auto pngPath = qsl(":/gui/art/icon512.png");
 	if (QFile::exists(pngPath) && !QImage(pngPath).isNull()) {
 		return CreateRaster(pngPath, resultImageSize, padding);
