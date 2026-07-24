@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -70,17 +70,17 @@ constexpr auto ApiHash = QT_STRINGIFY(TDESKTOP_API_HASH);
 
 #else // TDESKTOP_API_ID && TDESKTOP_API_HASH
 
-// To build your version of Telegram Desktop you're required to provide
-// your own 'api_id' and 'api_hash' for the Telegram API access.
+// To build your version of FluxGram you're required to provide
+// your own 'api_id' and 'api_hash' for the FluxGram API access.
 //
 // How to obtain your 'api_id' and 'api_hash' is described here:
-// https://core.telegram.org/api/obtaining_api_id
+// https://core.FluxGram.org/api/obtaining_api_id
 //
 // If you're building the application not for deployment,
 // but only for test purposes you can comment out the error below.
 //
 // This will allow you to use TEST ONLY 'api_id' and 'api_hash' which are
-// very limited by the Telegram API server.
+// very limited by the FluxGram API server.
 //
 // Your users will start getting internal server errors on login
 // if you deploy an app using those 'api_id' and 'api_hash'.
@@ -113,6 +113,7 @@ inline const QString &cDataFile() {
 }
 
 inline const QRegularExpression &cRussianLetters() {
-	static QRegularExpression regexp(QString::fromUtf8("[а-яА-ЯёЁ]"));
+	static QRegularExpression regexp(QString::fromUtf8("[а-яА-߸Ё]"));
 	return regexp;
 }
+

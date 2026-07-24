@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_session.h"
 
@@ -86,7 +86,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/random.h"
 #include "spellcheck/spellcheck_highlight_syntax.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/data/messages_storage.h"
 #include "ayu/features/filters/filters_controller.h"
@@ -327,7 +327,7 @@ Session::Session(not_null<Main::Session*> session)
 			}
 		}, _lifetime);
 
-		// AyuGram disableStories
+		// FluxGram disableStories
 		const auto &settings = AyuSettings::getInstance();
 		if (!settings.disableStories()) {
 			_stories->loadMore(Data::StorySourcesList::NotHidden);
@@ -2729,7 +2729,7 @@ void Session::updateEditedMessage(const MTPMessage &data) {
 		return;
 	}
 
-	// AyuGram saveMessagesHistory
+	// FluxGram saveMessagesHistory
 	const auto &settings = AyuSettings::getInstance();
 	HistoryMessageEdition edit;
 
@@ -5112,7 +5112,7 @@ void Session::registerItemView(not_null<ViewElement*> view) {
 void Session::unregisterItemView(not_null<ViewElement*> view) {
 	// Expects(!_heavyViewParts.contains(view));
 	if (_heavyViewParts.contains(view)) {
-		view->unloadHeavyPart(); // AyuGram: fix crash when using `saveDeletedMessages`
+		view->unloadHeavyPart(); // FluxGram: fix crash when using `saveDeletedMessages`
 	}
 
 	_shownSpoilers.remove(view);
@@ -5329,7 +5329,7 @@ void Session::serviceNotification(
 				| MTPDuser::Flag::f_verified),
 			MTP_long(peerToUser(PeerData::kServiceNotificationsId).bare),
 			MTPlong(), // access_hash
-			MTP_string("Telegram"),
+			MTP_string("FluxGram"),
 			MTPstring(), // last_name
 			MTPstring(), // username
 			MTP_string("42777"),
@@ -5759,3 +5759,8 @@ HistoryItem *Session::messageWithPeer(PeerId id) const {
 }
 
 } // namespace Data
+
+
+
+
+

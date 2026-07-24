@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/premium_preview_box.h"
 
@@ -1360,7 +1360,7 @@ void Show(
 		return;
 	} else if (descriptor.section == PremiumFeature::Business) {
 		show->showBox(Box([=](not_null<Ui::GenericBox*> box) {
-			TelegramBusinessPreviewBox(box, &show->session());
+			FluxGramBusinessPreviewBox(box, &show->session());
 			DecorateListPromoBox(box, show, descriptor);
 		}));
 		return;
@@ -1672,7 +1672,7 @@ void UpgradedStoriesPreviewBox(
 		tr::lng_premium_stories_about_mobile());
 }
 
-void TelegramBusinessPreviewBox(
+void FluxGramBusinessPreviewBox(
 		not_null<Ui::GenericBox*> box,
 		not_null<Main::Session*> session) {
 	using namespace Ui::Text;
@@ -1770,3 +1770,4 @@ object_ptr<Ui::GradientButton> CreateUnlockButton(
 
 	return result;
 }
+

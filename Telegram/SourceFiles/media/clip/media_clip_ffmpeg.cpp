@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "media/clip/media_clip_ffmpeg.h"
 
@@ -19,7 +19,7 @@ constexpr auto kSkipInvalidDataPackets = 10;
 constexpr auto kMaxInlineArea = 1280 * 720;
 constexpr auto kMaxSendingArea = 3840 * 2160; // usual 4K
 
-// See https://github.com/telegramdesktop/tdesktop/issues/7225
+// See https://github.com/FluxGramdesktop/tdesktop/issues/7225
 constexpr auto kAlignImageBy = 64;
 
 void alignedImageBufferCleanupHandler(void *data) {
@@ -515,3 +515,4 @@ int64_t FFMpegReaderImplementation::Seek(void *opaque, int64_t offset, int whenc
 } // namespace internal
 } // namespace Clip
 } // namespace Media
+

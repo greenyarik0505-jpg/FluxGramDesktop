@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -43,11 +43,11 @@ inline QString SecureAcceptError() {
 }
 
 inline QString PassportCorrupted() {
-	return u"It seems your Telegram Passport data was corrupted.\n\nYou can reset your Telegram Passport and restart this authorization."_q;
+	return u"It seems your FluxGram Passport data was corrupted.\n\nYou can reset your FluxGram Passport and restart this authorization."_q;
 }
 
 inline QString PassportCorruptedChange() {
-	return u"It seems your Telegram Passport data was corrupted.\n\nYou can reset your Telegram Passport and change your cloud password."_q;
+	return u"It seems your FluxGram Passport data was corrupted.\n\nYou can reset your FluxGram Passport and change your cloud password."_q;
 }
 
 inline QString PassportCorruptedReset() {
@@ -55,7 +55,7 @@ inline QString PassportCorruptedReset() {
 }
 
 inline QString PassportCorruptedResetSure() {
-	return u"Are you sure you want to reset your Telegram Passport data?"_q;
+	return u"Are you sure you want to reset your FluxGram Passport data?"_q;
 }
 
 inline QString UnknownSecureScanError() {
@@ -72,3 +72,4 @@ inline QString AutostartEnableError() {
 
 } // namespace Hard
 } // namespace Lang
+

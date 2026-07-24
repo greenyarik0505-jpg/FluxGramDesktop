@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -70,3 +70,4 @@ inline MemoryBuffer mb(const void *ptr, uint32 size) {
 	}\
 }
 //usage MTP_LOG(dc, ("log: %1 %2").arg(1).arg(2))
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/admin_log/history_admin_log_item.h"
 
@@ -748,7 +748,7 @@ TextWithEntities GenerateDefaultBannedRightsChangeText(
 				data.vid().v,
 				data.vicon_emoji_id().value_or_empty(),
 				qs(data.vtitle())),
-			u"internal:url:https://t.me/c/%1/%2"_q.arg(
+			u"internal:url:https://github.com/greenyarik0505-jpg/FluxGramDesktop/%1/%2"_q.arg(
 				peerToChannel(channel->id).bare).arg(
 					data.vid().v));
 	}, [](const MTPDforumTopicDeleted &) {
@@ -2295,3 +2295,5 @@ void GenerateItems(
 }
 
 } // namespace AdminLog
+
+

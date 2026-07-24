@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "info/info_top_bar.h"
 
@@ -29,7 +29,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_dialogs.h"
 #include "styles/style_info.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -517,7 +517,7 @@ void TopBar::updateControlsVisibility(anim::type animated) {
 }
 
 void TopBar::setStories(rpl::producer<Dialogs::Stories::Content> content) {
-	// AyuGram disableStories
+	// FluxGram disableStories
 	const auto &settings = AyuSettings::getInstance();
 	if (settings.disableStories()) {
 		return;
@@ -855,3 +855,5 @@ void TopBar::performDelete() {
 }
 
 } // namespace Info
+
+

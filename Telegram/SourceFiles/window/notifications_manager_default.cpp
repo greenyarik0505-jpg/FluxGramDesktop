@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "window/notifications_manager_default.h"
 
@@ -44,7 +44,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QScreen>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/utils/telegram_helpers.h"
 #include "ayu/features/streamer_mode/streamer_mode.h"
 
@@ -583,7 +583,7 @@ void Widget::hideAnimated(float64 duration, const anim::transition &func) {
 	_hiding = true;
 	// Stop the previous animation so as to make sure that the notification
 	// is fully restored before hiding it again.
-	// Relates to https://github.com/telegramdesktop/tdesktop/issues/28811.
+	// Relates to https://github.com/FluxGramdesktop/tdesktop/issues/28811.
 	_a_opacity.stop();
 	_a_opacity.start([this] { opacityAnimationCallback(); }, 1., 0., duration, func);
 }
@@ -1022,7 +1022,7 @@ void Notification::updateNotifyDisplay() {
 				: TextWithEntities{ name };
 		};
 		auto title = options.hideNameAndPhoto
-			? TextWithEntities{ u"AyuGram Desktop"_q }
+			? TextWithEntities{ u"FluxGram Desktop"_q }
 			: reminder
 			? tr::lng_notification_reminder(tr::now, tr::marked)
 			: topicWithChat();
@@ -1346,3 +1346,8 @@ void HideAllButton::paintEvent(QPaintEvent *e) {
 } // namespace Default
 } // namespace Notifications
 } // namespace Window
+
+
+
+
+

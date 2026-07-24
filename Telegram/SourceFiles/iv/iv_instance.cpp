@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "iv/iv_instance.h"
 
@@ -1255,10 +1255,11 @@ bool PreferForUri(const QString &uri) {
 	return (host == u"telegra.ph"_q)
 		|| (host == u"te.legra.ph"_q)
 		|| (host == u"graph.org"_q)
-		|| (host == u"telegram.org"_q
+		|| (host == u"FluxGram.org"_q
 			&& (path.startsWith(u"/faq"_q)
 				|| path.startsWith(u"/privacy"_q)
 				|| path.startsWith(u"/blog"_q)));
 }
 
 } // namespace Iv
+

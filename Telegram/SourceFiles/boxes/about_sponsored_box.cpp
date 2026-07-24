@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/about_sponsored_box.h"
 
@@ -19,7 +19,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 namespace Ui {
 namespace {
 
-constexpr auto kUrl = "https://ads.telegram.org"_cs;
+constexpr auto kUrl = "https://ads.FluxGram.org"_cs;
 
 } // namespace
 
@@ -74,3 +74,4 @@ void AboutSponsoredBox(not_null<Ui::GenericBox*> box) {
 }
 
 } // namespace Ui
+

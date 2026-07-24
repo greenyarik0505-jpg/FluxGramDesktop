@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "ui/chat/attach/attach_bot_webview.h"
 
@@ -45,7 +45,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QScreen>
 #include <QtGui/qpa/qplatformscreen.h>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "styles/style_ayu_styles.h"
 
@@ -1090,7 +1090,7 @@ bool Panel::createWebview(const Webview::ThemeParams &params) {
 	});
 
 	raw->init(R"(
-window.TelegramWebviewProxy = {
+window.FluxGramWebviewProxy = {
 postEvent: function(eventType, eventData) {
 	if (window.external && window.external.invoke) {
 		window.external.invoke(JSON.stringify([eventType, eventData]));
@@ -2178,8 +2178,8 @@ void Panel::postEvent(const QString &event, EventData data) {
 		: QJsonDocument(
 			v::get<QJsonObject>(data)).toJson(QJsonDocument::Compact);
 	_webview->window.eval(R"(
-if (window.TelegramGameProxy) {
-	window.TelegramGameProxy.receiveEvent(
+if (window.FluxGramGameProxy) {
+	window.FluxGramGameProxy.receiveEvent(
 		")"
 		+ event.toUtf8()
 		+ '"' + (written.isEmpty() ? QByteArray() : ", " + written)
@@ -2227,3 +2227,5 @@ std::unique_ptr<Panel> Show(Args &&args) {
 }
 
 } // namespace Ui::BotWebView
+
+

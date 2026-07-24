@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "export/output/export_output_json.h"
 
@@ -530,7 +530,7 @@ QByteArray SerializeMessage(
 		pushBare("values", SerializeArray(context, list));
 	}, [&](const ActionContactSignUp &data) {
 		pushActor();
-		pushAction("joined_telegram");
+		pushAction("joined_FluxGram");
 	}, [&](const ActionGeoProximityReached &data) {
 		pushAction("proximity_reached");
 		if (data.fromId) {
@@ -1154,7 +1154,7 @@ Result JsonWriter::start(
 	}
 	auto block = pushNesting(Context::kObject);
 	block.append(prepareObjectItemStart("about"));
-	block.append(SerializeString(_environment.aboutTelegram));
+	block.append(SerializeString(_environment.aboutFluxGram));
 	return _output->writeBlock(block);
 }
 
@@ -1773,3 +1773,4 @@ std::unique_ptr<File> JsonWriter::fileWithRelativePath(
 
 } // namespace Output
 } // namespace Export
+

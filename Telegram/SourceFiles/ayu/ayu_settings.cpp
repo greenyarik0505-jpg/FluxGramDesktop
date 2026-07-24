@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -391,16 +391,16 @@ void AyuSettings::load() {
 			});
 			p["useGlobalGhostMode"] = true;
 
-			LOG(("AyuGramSettings: migrated ghost mode settings to per-account format"));
+			LOG(("FluxGramSettings: migrated ghost mode settings to per-account format"));
 		}
 
 		try {
 			from_json(p, settings);
 		} catch (...) {
-			LOG(("AyuGramSettings: failed to parse settings file"));
+			LOG(("FluxGramSettings: failed to parse settings file"));
 		}
 	} catch (...) {
-		LOG(("AyuGramSettings: failed to read settings file (not json-like)"));
+		LOG(("FluxGramSettings: failed to read settings file (not json-like)"));
 	}
 
 	if (cGhost()) {
@@ -1014,7 +1014,7 @@ void AyuSettings::setVoiceConfirmation(bool val) {
 void AyuSettings::setTranslationProvider(TranslationProvider val) {
 	if ((val == TranslationProvider::Native)
 		&& !Platform::IsTranslateProviderAvailable()) {
-		val = TranslationProvider::Telegram;
+		val = TranslationProvider::FluxGram;
 	}
 	if (_translationProvider.current() == val) return;
 	_translationProvider = val;
@@ -1257,3 +1257,5 @@ void from_json(const nlohmann::json &j, AyuSettings &s) {
 		j["messageShotSettings"].get_to(s._messageShotSettings);
 	}
 }
+
+

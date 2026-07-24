@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "export/view/export_view_panel_controller.h"
 
@@ -86,7 +86,7 @@ void SuggestBox::prepare() {
 Environment PrepareEnvironment(not_null<Main::Session*> session) {
 	auto result = Environment();
 	result.internalLinksDomain = session->serverConfig().internalLinksDomain;
-	result.aboutTelegram = tr::lng_export_about_telegram(tr::now).toUtf8();
+	result.aboutFluxGram = tr::lng_export_about_telegram(tr::now).toUtf8();
 	result.aboutContacts = tr::lng_export_about_contacts(tr::now).toUtf8();
 	result.aboutFrequent = tr::lng_export_about_frequent(tr::now).toUtf8();
 	result.aboutSessions = tr::lng_export_about_sessions(tr::now).toUtf8();
@@ -430,3 +430,4 @@ void PanelController::saveSettings() const {
 
 } // namespace View
 } // namespace Export
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "countries/countries_instance.h"
 
@@ -54,7 +54,7 @@ const std::array<Info, 231> FallbackList = { {
 	{ "Central African Rep.", "CF", "", { CallingCodeInfo{ "236", {}, { "XX XX XX XX" } } }, false },
 	{ "Congo (Rep.)", "CG", "", { CallingCodeInfo{ "242", {}, { "XX XXX XXXX" } } }, false },
 	{ "Switzerland", "CH", "", { CallingCodeInfo{ "41", {}, { "XX XXX XXXX" } } }, false },
-	{ "Côte d'Ivoire", "CI", "", { CallingCodeInfo{ "225", {}, { "XX XX XX XXXX" } } }, false },
+	{ "Cote d'Ivoire", "CI", "", { CallingCodeInfo{ "225", {}, { "XX XX XX XXXX" } } }, false },
 	{ "Cook Islands", "CK", "", { CallingCodeInfo{ "682", {}, {} } }, false },
 	{ "Chile", "CL", "", { CallingCodeInfo{ "56", {}, { "X XXXX XXXX" } } }, false },
 	{ "Cameroon", "CM", "", { CallingCodeInfo{ "237", {}, { "XXXX XXXX" } } }, false },
@@ -63,7 +63,7 @@ const std::array<Info, 231> FallbackList = { {
 	{ "Costa Rica", "CR", "", { CallingCodeInfo{ "506", {}, { "XXXX XXXX" } } }, false },
 	{ "Cuba", "CU", "", { CallingCodeInfo{ "53", {}, { "X XXX XXXX" } } }, false },
 	{ "Cape Verde", "CV", "", { CallingCodeInfo{ "238", {}, { "XXX XXXX" } } }, false },
-	{ "Curaçao", "CW", "", { CallingCodeInfo{ "599", { "9" }, {} } }, false },
+	{ "Curacao", "CW", "", { CallingCodeInfo{ "599", { "9" }, {} } }, false },
 	{ "Cyprus", "CY", "", { CallingCodeInfo{ "357", {}, { "XXXX XXXX" } } }, false },
 	{ "Czech Republic", "CZ", "", { CallingCodeInfo{ "420", {}, { "XXX XXX XXX" } } }, false },
 	{ "Germany", "DE", "", { CallingCodeInfo{ "49", {}, { "XXXX XXXXXXX" } } }, false },
@@ -189,7 +189,7 @@ const std::array<Info, 231> FallbackList = { {
 	{ "Palau", "PW", "", { CallingCodeInfo{ "680", {}, {} } }, false },
 	{ "Paraguay", "PY", "", { CallingCodeInfo{ "595", {}, { "XXX XXX XXX" } } }, false },
 	{ "Qatar", "QA", "", { CallingCodeInfo{ "974", {}, { "XX XXX XXX" } } }, false },
-	{ "Réunion", "RE", "", { CallingCodeInfo{ "262", {}, { "XXX XXX XXX" } } }, false },
+	{ "Reunion", "RE", "", { CallingCodeInfo{ "262", {}, { "XXX XXX XXX" } } }, false },
 	{ "Romania", "RO", "", { CallingCodeInfo{ "40", {}, { "XXX XXX XXX" } } }, false },
 	{ "Serbia", "RS", "", { CallingCodeInfo{ "381", {}, { "XX XXX XXXX" } } }, false },
 	{ "Russian Federation", "RU", "", { CallingCodeInfo{ "7", {}, { "XXX XXX XXXX" } } }, false },
@@ -209,7 +209,7 @@ const std::array<Info, 231> FallbackList = { {
 	{ "Somalia", "SO", "", { CallingCodeInfo{ "252", {}, { "XX XXX XXX" } } }, false },
 	{ "Suriname", "SR", "", { CallingCodeInfo{ "597", {}, { "XXX XXXX" } } }, false },
 	{ "South Sudan", "SS", "", { CallingCodeInfo{ "211", {}, { "XX XXX XXXX" } } }, false },
-	{ "São Tomé & Príncipe", "ST", "", { CallingCodeInfo{ "239", {}, { "XX XXXXX" } } }, false },
+	{ "Sao Tome & Principe", "ST", "", { CallingCodeInfo{ "239", {}, { "XX XXXXX" } } }, false },
 	{ "El Salvador", "SV", "", { CallingCodeInfo{ "503", {}, { "XXXX XXXX" } } }, false },
 	{ "Sint Maarten", "SX", "", { CallingCodeInfo{ "1721", {}, { "XXX XXXX" } } }, false },
 	{ "Syria", "SY", "", { CallingCodeInfo{ "963", {}, { "XXX XXX XXX" } } }, false },
@@ -528,3 +528,4 @@ QVector<int> Groups(const QString &phone) {
 }
 
 } // namespace Countries
+

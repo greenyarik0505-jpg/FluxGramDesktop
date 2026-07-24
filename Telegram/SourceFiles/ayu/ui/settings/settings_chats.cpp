@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -175,7 +175,7 @@ void BuildMarks(
 				auto box = Box<EditMarkBox>(
 					tr::ayu_DeletedMarkText(),
 					settings->deletedMark(),
-					QString("🧹"),
+					QString("??"),
 					[=](const QString &value) {
 						AyuSettings::getInstance().setDeletedMark(value);
 					});
@@ -501,3 +501,4 @@ Type AyuChatsId() {
 }
 
 } // namespace Settings
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "calls/group/calls_group_members_row.h"
 
@@ -20,7 +20,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "webrtc/webrtc_video_track.h"
 #include "styles/style_calls.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ui/ayu_userpic.h"
 
 
@@ -845,3 +845,5 @@ void MembersRow::rightActionStopLastRipple() {
 }
 
 } // namespace Calls::Group
+
+

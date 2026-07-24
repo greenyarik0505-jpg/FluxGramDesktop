@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "intro/intro_step.h"
 
@@ -39,7 +39,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_intro.h"
 #include "styles/style_window.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ui/ayu_logo.h"
 
 
@@ -473,8 +473,8 @@ void Step::paintCover(QPainter &p, int top) {
 	st::introCoverRight.paint(p, width() - right - st::introCoverRight.width(), coverHeight - st::introCoverRight.height(), width());
 
 	auto planeTop = top + st::introCoverIconTop;
-	const auto ayuGramIcon = Ui::PixmapFromImage(AyuAssets::currentAppLogo());
-	QIcon(ayuGramIcon).paint(&p, QRect(width() / 2 - ayuGramIcon.width() / 2, planeTop - 16, ayuGramIcon.width(), st::introCoverIcon.height()));
+	const auto FluxGramIcon = Ui::PixmapFromImage(AyuAssets::currentAppLogo());
+	QIcon(FluxGramIcon).paint(&p, QRect(width() / 2 - FluxGramIcon.width() / 2, planeTop - 16, FluxGramIcon.width(), st::introCoverIcon.height()));
 }
 
 int Step::contentLeft() const {
@@ -648,3 +648,5 @@ void Step::finished() {
 
 } // namespace details
 } // namespace Intro
+
+

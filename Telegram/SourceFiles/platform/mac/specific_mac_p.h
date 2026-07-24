@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -26,3 +26,4 @@ QString objc_documentsPath();
 QString objc_appDataPath();
 QByteArray objc_downloadPathBookmark(const QString &path);
 void objc_downloadPathEnableAccess(const QByteArray &bookmark);
+

@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -444,7 +444,7 @@ void Make(not_null<QWidget*> box, const ShotConfig &config, const Fn<void(QImage
 
 namespace {
 
-// 🥀🥀🥀
+// ??????
 
 std::shared_ptr<Ui::ChatStyle> BuildShotChatStyle(
 		not_null<Window::SessionController*> controller) {
@@ -529,3 +529,8 @@ void Wrapper(not_null<HistoryInner*> widget, Fn<void()> clearSelected) {
 }
 
 }
+
+
+
+
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/utils.h"
 
@@ -442,7 +442,7 @@ QString translitRusEng(const QString &rus) {
 		fastRusEng.insert(QString::fromUtf8("александр"), u"alexander"_q);
 		fastRusEng.insert(QString::fromUtf8("Филипп"), u"Philip"_q);
 		fastRusEng.insert(QString::fromUtf8("филипп"), u"philip"_q);
-		fastRusEng.insert(QString::fromUtf8("Пётр"), u"Petr"_q);
+		fastRusEng.insert(QString::fromUtf8("ϸтр"), u"Petr"_q);
 		fastRusEng.insert(QString::fromUtf8("пётр"), u"petr"_q);
 		fastRusEng.insert(QString::fromUtf8("Гай"), u"Gai"_q);
 		fastRusEng.insert(QString::fromUtf8("гай"), u"gai"_q);
@@ -510,3 +510,4 @@ QString rusKeyboardLayoutSwitch(const QString& from) {
 	QString ukr = switchKeyboardLayout(from, fastUkrKeyboardSwitch);
 	return rus == ukr ? rus : rus + ' ' + ukr;
 }
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/history_item.h"
 
@@ -73,7 +73,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "platform/platform_notifications_manager.h"
 #include "spellcheck/spellcheck_highlight_syntax.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/features/filters/filters_controller.h"
 #include "ayu/features/message_shot/message_shot.h"
@@ -280,7 +280,7 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
 		});
 	}, [&](const MTPDmessageMediaPhoto &media) -> Result {
 		const auto photo = media.vphoto();
-		if (false) {  // AyuGram: show expiring messages
+		if (false) {  // FluxGram: show expiring messages
 			LOG(("App Error: "
 				"Unexpected MTPMessageMediaPhoto "
 				"with ttl_seconds in CreateMedia."));
@@ -301,7 +301,7 @@ std::unique_ptr<Data::Media> HistoryItem::CreateMedia(
 		});
 	}, [&](const MTPDmessageMediaDocument &media) -> Result {
 		const auto document = media.vdocument();
-		if (false) {  // AyuGram: show expiring messages
+		if (false) {  // FluxGram: show expiring messages
 			LOG(("App Error: "
 				"Unexpected MTPMessageMediaDocument "
 				"with ttl_seconds in CreateMedia."));
@@ -2979,7 +2979,7 @@ bool HistoryItem::canDeleteForEveryone(TimeId now) const {
 		return false;
 	} else if (const auto user = peer->asUser()) {
 		// Bots receive all messages and there is no sense in revoking them.
-		// See https://github.com/telegramdesktop/tdesktop/issues/3818
+		// See https://github.com/FluxGramdesktop/tdesktop/issues/3818
 		if ((user->isBot() && !user->isSupport())
 			|| user->isInaccessible()) {
 			return false;
@@ -3746,7 +3746,7 @@ void HistoryItem::setAyuHint(const QString &hint) {
 		history()->owner().requestItemViewRefresh(this);
 		history()->owner().requestItemResize(this);
 	} catch (...) {
-		DEBUG_LOG(("AyuGram: crash in setting hint"));
+		DEBUG_LOG(("FluxGram: crash in setting hint"));
 	}
 }
 
@@ -6085,7 +6085,7 @@ void HistoryItem::setServiceMessageByAction(const MTPmessageAction &action) {
 
 	auto prepareTopicCreate = [&](const MTPDmessageActionTopicCreate &action) {
 		auto result = PreparedServiceText();
-		const auto topicUrl = u"internal:url:https://t.me/c/%1/%2"_q
+		const auto topicUrl = u"internal:url:https://github.com/greenyarik0505-jpg/FluxGramDesktop/%1/%2"_q
 			.arg(peerToChannel(_history->peer->id).bare)
 			.arg(id.bare);
 		result.text = tr::lng_action_topic_created(
@@ -8145,3 +8145,9 @@ void HistoryItem::overrideMedia(std::unique_ptr<Data::Media> media) {
 void HistoryItem::removeTranslationBit() {
 	RemoveComponents(HistoryMessageTranslation::Bit());
 }
+
+
+
+
+
+

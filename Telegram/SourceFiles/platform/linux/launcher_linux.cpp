@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "platform/linux/launcher_linux.h"
 
@@ -99,7 +99,7 @@ bool Launcher::launchUpdater(UpdaterLaunch action) {
 			argumentsList.push_back(cWorkingDir().toStdString());
 		}
 	} else {
-		// Don't relaunch Telegram.
+		// Don't relaunch FluxGram.
 		argumentsList.push_back("-justupdate");
 
 		argumentsList.push_back("-workpath");
@@ -145,3 +145,4 @@ bool Launcher::launchUpdater(UpdaterLaunch action) {
 }
 
 } // namespace
+

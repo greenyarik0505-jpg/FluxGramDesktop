@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -39,7 +39,7 @@ void BuildTranslator(SectionBuilder &builder, AyuSectionBuilder &ayu) {
 	auto *settings = &AyuSettings::getInstance();
 
 	const auto options = std::vector{
-		std::pair(TranslationProvider::Telegram, QString("Telegram")),
+		std::pair(TranslationProvider::FluxGram, QString("FluxGram")),
 		std::pair(TranslationProvider::Google, QString("Google")),
 		std::pair(TranslationProvider::Yandex, QString("Yandex")),
 	};
@@ -120,7 +120,7 @@ void BuildShowPeerId(SectionBuilder &builder) {
 
 	const auto options = std::vector{
 		QString(tr::ayu_SettingsShowID_Hide(tr::now)),
-		QString("Telegram API"),
+		QString("FluxGram API"),
 		QString("Bot API")
 	};
 
@@ -335,3 +335,5 @@ Type AyuGeneralId() {
 }
 
 } // namespace Settings
+
+

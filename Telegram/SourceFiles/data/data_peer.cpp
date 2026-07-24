@@ -6,6 +6,7 @@ For license and copyright information please follow this link:
 https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_peer.h"
+#include "window/main_window.h"
 
 #include "api/api_sensitive_content.h"
 #include "data/data_user.h"

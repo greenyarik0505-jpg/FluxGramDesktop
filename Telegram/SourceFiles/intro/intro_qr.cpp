@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "intro/intro_qr.h"
 
@@ -32,7 +32,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "platform/platform_webauthn.h"
 #include "styles/style_intro.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "main/main_domain.h"
 
 
@@ -40,17 +40,17 @@ namespace Intro {
 namespace details {
 namespace {
 
-[[nodiscard]] QImage TelegramQrExact(const Qr::Data &data, int pixel) {
+[[nodiscard]] QImage FluxGramQrExact(const Qr::Data &data, int pixel) {
 	return Qr::Generate(data, pixel, Qt::black);
 }
 
-[[nodiscard]] QImage TelegramQr(const Qr::Data &data, int pixel, int max = 0) {
+[[nodiscard]] QImage FluxGramQr(const Qr::Data &data, int pixel, int max = 0) {
 	Expects(data.size > 0);
 
 	if (max > 0 && data.size * pixel > max) {
 		pixel = std::max(max / data.size, 1);
 	}
-	const auto qr = TelegramQrExact(data, pixel * style::DevicePixelRatio());
+	const auto qr = FluxGramQrExact(data, pixel * style::DevicePixelRatio());
 	auto result = QImage(qr.size(), QImage::Format_ARGB32_Premultiplied);
 	result.fill(Qt::white);
 	{
@@ -108,7 +108,7 @@ namespace {
 		std::move(qrs),
 		rpl::duplicate(palettes)
 	) | rpl::map([](const Qr::Data &code, const auto &) {
-		return TelegramQr(code, st::introQrPixel, st::introQrMaxSize);
+		return FluxGramQr(code, st::introQrPixel, st::introQrMaxSize);
 	}) | rpl::on_next([=](QImage &&image) {
 		state->previous = std::move(state->qr);
 		state->qr = std::move(image);
@@ -123,7 +123,7 @@ namespace {
 	std::move(
 		palettes
 	) | rpl::map([] {
-		return TelegramLogoImage();
+		return FluxGramLogoImage();
 	}) | rpl::on_next([=](QImage &&image) {
 		state->center = std::move(image);
 	}, result->lifetime());
@@ -528,7 +528,7 @@ void QrWidget::cancelled() {
 	api().request(base::take(_requestId)).cancel();
 }
 
-QImage TelegramLogoImage() {
+QImage FluxGramLogoImage() {
 	const auto size = QSize(st::introQrCenterSize, st::introQrCenterSize);
 	auto result = QImage(
 		size * style::DevicePixelRatio(),
@@ -548,3 +548,5 @@ QImage TelegramLogoImage() {
 
 } // namespace details
 } // namespace Intro
+
+

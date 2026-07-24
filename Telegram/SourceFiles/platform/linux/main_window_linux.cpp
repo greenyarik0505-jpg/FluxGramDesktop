@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "platform/linux/main_window_linux.h"
 
@@ -228,7 +228,7 @@ void MainWindow::createGlobalMenu() {
 		});
 
 	auto quit = file->addAction(
-		tr::lng_mac_menu_quit_telegram(tr::now, lt_telegram, u"AyuGram"_q),
+		tr::lng_mac_menu_quit_FluxGram(tr::now, lt_FluxGram, u"FluxGram"_q),
 		this,
 		[=] { quitFromTray(); },
 		QKeySequence::Quit);
@@ -424,10 +424,10 @@ void MainWindow::createGlobalMenu() {
 	auto help = psMainMenu->addMenu(tr::lng_linux_menu_help(tr::now));
 
 	auto about = help->addAction(
-		tr::lng_mac_menu_about_telegram(
+		tr::lng_mac_menu_about_FluxGram(
 			tr::now,
-			lt_telegram,
-			u"AyuGram"_q),
+			lt_FluxGram,
+			u"FluxGram"_q),
 		[=] {
 			ensureWindowShown();
 			controller().show(Box(AboutBox, sessionController()));
@@ -571,3 +571,5 @@ QString ScreenDisplayLabel(const QScreen *screen) {
 }
 
 } // namespace Platform
+
+

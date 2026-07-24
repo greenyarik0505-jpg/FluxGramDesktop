@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -53,7 +53,7 @@ public:
 		HasMyLinks  = (1 << 9),
 		StaticTitle = (1 << 10),
 
-		NewChats      = (1 << 11), // Telegram Business exceptions.
+		NewChats      = (1 << 11), // FluxGram Business exceptions.
 		ExistingChats = (1 << 12),
 	};
 	friend constexpr inline bool is_flag_type(Flag) { return true; };
@@ -275,3 +275,4 @@ private:
 	not_null<History*> history);
 
 } // namespace Data
+

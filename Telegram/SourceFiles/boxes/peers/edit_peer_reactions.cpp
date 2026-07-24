@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/peers/edit_peer_reactions.h"
 
@@ -940,7 +940,7 @@ void EditAllowedReactionsBox(
 				tr::lng_manage_peer_reactions_paid_link([=](QString text) {
 					return tr::link(
 						text,
-						u"https://telegram.org/tos/stars"_q);
+						u"https://FluxGram.org/tos/stars"_q);
 				}),
 				tr::marked));
 	}
@@ -1034,3 +1034,4 @@ void SaveAllowedReactions(
 		}
 	}).send();
 }
+

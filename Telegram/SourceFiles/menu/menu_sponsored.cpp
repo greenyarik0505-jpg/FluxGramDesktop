@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "menu/menu_sponsored.h"
 
@@ -53,7 +53,7 @@ void AboutBox(
 		SponsoredPhrases phrases,
 		const Data::SponsoredMessages::Details &details,
 		Data::SponsoredReportAction report) {
-	constexpr auto kUrl = "https://promote.telegram.org"_cs;
+	constexpr auto kUrl = "https://promote.FluxGram.org"_cs;
 
 	box->setWidth(st::boxWideWidth);
 	box->setNoContentMargin(true);
@@ -308,7 +308,7 @@ void ShowReportSponsoredBox(
 		Data::SponsoredReportAction report) {
 	const auto guideLink = tr::link(
 		tr::lng_report_sponsored_reported_link(tr::now),
-		u"https://promote.telegram.org/guidelines"_q);
+		u"https://promote.FluxGram.org/guidelines"_q);
 
 	auto performRequest = [=](
 			const auto &repeatRequest,
@@ -513,3 +513,4 @@ void ShowSponsoredAbout(
 }
 
 } // namespace Menu
+

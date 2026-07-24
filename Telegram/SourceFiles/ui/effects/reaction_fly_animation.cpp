@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "ui/effects/reaction_fly_animation.h"
 
@@ -17,7 +17,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/random.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/utils/taptic_engine/taptic_engine.h"
 
 
@@ -440,3 +440,5 @@ ReactionFlyCenter ReactionFlyAnimation::takeCenter() {
 }
 
 } // namespace HistoryView::Reactions
+
+

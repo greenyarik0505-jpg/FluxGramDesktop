@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "export/output/export_output_abstract.h"
 
@@ -167,7 +167,7 @@ Stats AbstractWriter::produceTestExample(
 
 	auto sessions = Data::SessionsList();
 	auto session = Data::Session();
-	session.applicationName = "Telegram Desktop";
+	session.applicationName = "FluxGram";
 	session.applicationVersion = "1.3.8";
 	session.country = "GB";
 	session.created = date();
@@ -183,7 +183,7 @@ Stats AbstractWriter::produceTestExample(
 	webSession.botUsername = "botfather";
 	webSession.browser = "Google Chrome";
 	webSession.created = date();
-	webSession.domain = "telegram.org";
+	webSession.domain = "FluxGram.org";
 	webSession.ip = "127.0.0.1";
 	webSession.lastActive = date();
 	webSession.platform = "Windows";
@@ -428,7 +428,7 @@ Stats AbstractWriter::produceTestExample(
 	sliceChat2.list.push_back([&] {
 		auto message = serviceMessage();
 		auto action = Data::ActionBotAllowed();
-		action.domain = "telegram.org";
+		action.domain = "FluxGram.org";
 		message.action.content = action;
 		return message;
 	}());
@@ -497,3 +497,4 @@ Stats AbstractWriter::produceTestExample(
 
 } // namespace Output
 } // namespace Export
+

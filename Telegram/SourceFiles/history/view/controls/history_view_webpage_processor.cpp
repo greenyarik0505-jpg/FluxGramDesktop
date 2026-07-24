@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/view/controls/history_view_webpage_processor.h"
 
@@ -16,7 +16,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "lang/lang_keys.h"
 #include "main/main_session.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/utils/telegram_helpers.h"
 
 
@@ -410,3 +410,8 @@ rpl::producer<WebpageParsed> WebpageProcessor::parsedValue() const {
 }
 
 } // namespace HistoryView::Controls
+
+
+
+
+

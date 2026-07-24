@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "payments/ui/payments_panel.h"
 
@@ -617,7 +617,7 @@ bool Panel::createWebview(const Webview::ThemeParams &params) {
 	});
 
 	raw->init(R"(
-window.TelegramWebviewProxy = {
+window.FluxGramWebviewProxy = {
 postEvent: function(eventType, eventData) {
 	if (window.external && window.external.invoke) {
 		window.external.invoke(JSON.stringify([eventType, eventData]));
@@ -934,8 +934,8 @@ void Panel::updateThemeParams(const Webview::ThemeParams &params) {
 		params.scrollBarBg,
 		params.scrollBarBgOver);
 	_webview->window.eval(R"(
-if (window.TelegramGameProxy) {
-	window.TelegramGameProxy.receiveEvent(
+if (window.FluxGramGameProxy) {
+	window.FluxGramGameProxy.receiveEvent(
 		"theme_changed",
 		{ "theme_params": )" + params.json + R"( });
 }
@@ -947,3 +947,4 @@ rpl::lifetime &Panel::lifetime() {
 }
 
 } // namespace Payments::Ui
+

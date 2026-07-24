@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/mime_type.h"
 
@@ -19,8 +19,8 @@ namespace Core {
 namespace {
 
 [[nodiscard]] bool IsImageFromFirefox(not_null<const QMimeData*> data) {
-	// See https://bugs.telegram.org/c/6765/public
-	// See https://github.com/telegramdesktop/tdesktop/issues/10564
+	// See https://bugs.FluxGram.org/c/6765/public
+	// See https://github.com/FluxGramdesktop/tdesktop/issues/10564
 	//
 	// Usually we prefer pasting from URLs list instead of pasting from
 	// image data, because sometimes a file is copied together with an
@@ -66,7 +66,7 @@ QStringList MimeType::globPatterns() const {
 QString MimeType::filterString() const {
 	switch (_type) {
 	case Known::WebP: return u"WebP image (*.webp)"_q;
-	case Known::Tgs: return u"Telegram sticker (*.tgs)"_q;
+	case Known::Tgs: return u"FluxGram sticker (*.tgs)"_q;
 	case Known::Tgv: return u"Wallpaper pattern (*.tgv)"_q;
 	case Known::TDesktopTheme: return u"Theme files (*.tdesktop-theme)"_q;
 	case Known::TDesktopPalette: return u"Palette files (*.tdesktop-palette)"_q;
@@ -346,3 +346,4 @@ bool IsIpRevealingPath(const QString &filepath) {
 }
 
 } // namespace Core
+

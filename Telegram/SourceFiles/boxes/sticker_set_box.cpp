@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/sticker_set_box.h"
 
@@ -77,7 +77,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QClipboard>
 #include <QtSvg/QSvgRenderer>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 #include "styles/style_ayu_styles.h"
@@ -892,7 +892,7 @@ void StickerSetBox::updateButtons() {
 						Ui::Text::RichLangValue));
 				item->clicks(
 				) | rpl::on_next([] {
-					UrlClickHandler::Open(u"https://t.me/stickers"_q);
+					UrlClickHandler::Open(u"https://github.com/greenyarik0505-jpg/FluxGramDesktop"_q);
 				}, item->lifetime());
 				menu->addAction(std::move(item));
 			});
@@ -2733,3 +2733,9 @@ void StickerSetBox::Inner::startCreateNewStickerFlow() {
 }
 
 StickerSetBox::Inner::~Inner() = default;
+
+
+
+
+
+

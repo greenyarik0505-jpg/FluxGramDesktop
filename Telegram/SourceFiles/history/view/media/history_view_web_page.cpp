@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/view/media/history_view_web_page.h"
 
@@ -44,7 +44,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "ui/toast/toast.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -591,7 +591,7 @@ QSize WebPage::countOptimalSize() {
 					? Type::Twitter
 					: (_data->siteName == u"Instagram"_q)
 					? Type::Instagram
-					: Type::Telegram),
+					: Type::FluxGram),
 			},
 			.repaint = [=] { _parent->customEmojiRepaint(); },
 		});
@@ -1763,3 +1763,5 @@ WebPage::~WebPage() {
 }
 
 } // namespace HistoryView
+
+

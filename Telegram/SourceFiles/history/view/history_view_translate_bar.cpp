@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/view/history_view_translate_bar.h"
 
@@ -40,7 +40,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtGui/QtEvents>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -491,7 +491,7 @@ void TranslateBar::showMenu(base::unique_qptr<Ui::PopupMenu> menu) {
 		&st::menuIconCancel);
 
 	const auto &settings = AyuSettings::getInstance();
-	if (settings.translationProvider() == TranslationProvider::Telegram) {
+	if (settings.translationProvider() == TranslationProvider::FluxGram) {
 		_menu->addSeparator();
 		const auto cocoon = ChatHelpers::GenerateLocalTgsSticker(
 			&_history->session(),
@@ -674,3 +674,5 @@ rpl::producer<int> TranslateBar::heightValue() const {
 }
 
 } // namespace Ui
+
+

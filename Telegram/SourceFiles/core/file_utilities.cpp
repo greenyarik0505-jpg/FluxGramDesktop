@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/file_utilities.h"
 
@@ -163,7 +163,7 @@ void ShowInFolder(const QString &filepath) {
 
 QString DefaultDownloadPathFolder(not_null<Main::Session*> session) {
 #if OS_MAC_STORE
-	return u"Telegram Lite"_q;
+	return u"FluxGram Lite"_q;
 #else // OS_MAC_STORE
 	return session->supportMode() ? u"Tsupport Desktop"_q : AppName.utf16();
 #endif // OS_MAC_STORE
@@ -406,3 +406,4 @@ bool GetDefault(
 
 } // namespace internal
 } // namespace FileDialog
+

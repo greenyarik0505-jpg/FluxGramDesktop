@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/gift_premium_box.h"
 
@@ -674,7 +674,7 @@ void AddUniqueGiftPropertyRows(
 			value->lastSaleFragment = data.is_last_sale_on_fragment();
 			value->minimumPrice = data.vfloor_price().value_or_empty();
 			value->averagePrice = data.vaverage_price().value_or_empty();
-			value->forSaleOnTelegram = data.vlisted_count().value_or_empty();
+			value->forSaleOnFluxGram = data.vlisted_count().value_or_empty();
 			value->forSaleOnFragment = int(
 				data.vfragment_listed_count().value_or_empty());
 			value->fragmentUrl = qs(
@@ -2321,3 +2321,4 @@ void AddUniqueGiftValueTable(
 			MakeAveragePriceValue(table, tooltip, entry.uniqueGift));
 	}
 }
+

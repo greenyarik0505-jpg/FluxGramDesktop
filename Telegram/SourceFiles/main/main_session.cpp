@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "main/main_session.h"
 
@@ -63,7 +63,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "chat_helpers/spellchecker_common.h"
 #endif // TDESKTOP_DISABLE_SPELLCHECK
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "api/api_blocked_peers.h"
 
@@ -76,7 +76,7 @@ constexpr auto kTmpPasswordReserveTime = TimeId(10);
 [[nodiscard]] QString ValidatedInternalLinksDomain(
 		not_null<const Session*> session) {
 	// This domain should start with 'http[s]://' and end with '/'.
-	// Like 'https://telegram.me/' or 'https://t.me/'.
+	// Like 'https://FluxGram.me/' or 'https://t.me/'.
 	const auto &domain = session->serverConfig().internalLinksDomain;
 	const auto prefixes = {
 		u"https://"_q,
@@ -673,3 +673,6 @@ auto Session::colorIndicesValue()
 }
 
 } // namespace Main
+
+
+

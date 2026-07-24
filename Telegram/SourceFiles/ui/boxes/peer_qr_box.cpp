@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "ui/boxes/peer_qr_box.h"
 
@@ -67,7 +67,7 @@ using Colors = std::vector<QColor>;
 		st::profileQrFont->family());
 }
 
-[[nodiscard]] QImage TelegramQr(
+[[nodiscard]] QImage FluxGramQr(
 		const Qr::Data &data,
 		int pixel,
 		int max,
@@ -267,7 +267,7 @@ not_null<Ui::RpWidget*> PrepareQrWidget(
 			const auto downTo = remainder
 				? qrMaxSize - remainder
 				: qrMaxSize;
-			state->qrImage = TelegramQr(
+			state->qrImage = FluxGramQr(
 				Qr::Encode(link.toUtf8(), Qr::Redundancy::Default),
 				st::introQrPixel,
 				downTo,
@@ -911,7 +911,7 @@ void FillPeerQrBox(
 		const auto weak = base::make_weak(box);
 
 		crl::async([=] {
-			const auto qrImage = TelegramQr(
+			const auto qrImage = FluxGramQr(
 				Qr::Encode(
 					link.current().toUtf8(),
 					Qr::Redundancy::Default),
@@ -1011,3 +1011,4 @@ void DefaultShowFillPeerQrBoxCallback(
 }
 
 } // namespace Ui
+

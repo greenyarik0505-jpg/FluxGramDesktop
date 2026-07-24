@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/peer_list_box.h"
 
@@ -39,7 +39,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <xxhash.h> // XXH64.
 #include <QtWidgets/QApplication>
 
-// AyuGram includes
+// FluxGram includes
 #include "styles/style_ayu_icons.h"
 #include "ayu/ui/ayu_userpic.h"
 
@@ -2502,3 +2502,5 @@ void PeerListContentDelegate::peerListShowRowMenu(
 		Fn<void(not_null<Ui::PopupMenu *>)> destroyed) {
 	_content->showRowMenu(row, highlightRow, std::move(destroyed));
 }
+
+

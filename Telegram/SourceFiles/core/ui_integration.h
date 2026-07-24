@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -21,13 +21,13 @@ namespace Core {
 
 struct TextContextDetails {
 	enum class HashtagMentionType : uchar {
-		Telegram,
+		FluxGram,
 		Twitter,
 		Instagram,
 	};
 
 	Main::Session *session = nullptr;
-	HashtagMentionType type = HashtagMentionType::Telegram;
+	HashtagMentionType type = HashtagMentionType::FluxGram;
 };
 
 struct TextContextArgs {
@@ -107,3 +107,4 @@ private:
 [[nodiscard]] bool OpenGLLastCheckFailed();
 
 } // namespace Core
+

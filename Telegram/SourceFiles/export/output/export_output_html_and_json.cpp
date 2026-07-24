@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "export/output/export_output_html_and_json.h"
 
@@ -163,4 +163,5 @@ Result HtmlAndJsonWriter::invoke(Fn<Result(WriterPtr)> method) const {
 }
 
 } // namespace Export::Output
+
 

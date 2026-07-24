@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -16,3 +16,4 @@ inline void to_json(nlohmann::json &j, const QString &q) {
 inline void from_json(const nlohmann::json &j, QString &q) {
 	q = QString::fromStdString(j.get<std::string>());
 }
+

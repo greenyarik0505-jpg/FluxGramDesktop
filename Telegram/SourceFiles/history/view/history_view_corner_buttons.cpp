@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/view/history_view_corner_buttons.h"
 
@@ -125,7 +125,7 @@ void CornerButtons::mentionsClick() {
 	const auto already = (_delegate->cornerButtonsCurrentId().msg == msgId);
 
 	// Mark mention voice/video message as read.
-	// See https://github.com/telegramdesktop/tdesktop/issues/5623
+	// See https://github.com/FluxGramdesktop/tdesktop/issues/5623
 	if (msgId && already) {
 		if (const auto item = thread->owner().message(history->peer, msgId)) {
 			if (const auto media = item->media()) {
@@ -443,3 +443,4 @@ Fn<void(bool found)> CornerButtons::doneJumpFrom(
 }
 
 } // namespace HistoryView
+

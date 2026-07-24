@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/shortcuts.h"
 
@@ -71,10 +71,10 @@ const auto SupportCommands = base::flat_set<Command>{
 };
 
 const auto CommandByName = base::flat_map<QString, Command>{
-	{ u"close_telegram"_q    , Command::Close },
-	{ u"lock_telegram"_q     , Command::Lock },
-	{ u"minimize_telegram"_q , Command::Minimize },
-	{ u"quit_telegram"_q     , Command::Quit },
+	{ u"close_FluxGram"_q    , Command::Close },
+	{ u"lock_FluxGram"_q     , Command::Lock },
+	{ u"minimize_FluxGram"_q , Command::Minimize },
+	{ u"quit_FluxGram"_q     , Command::Quit },
 
 	{ u"media_play"_q        , Command::MediaPlay },
 	{ u"media_pause"_q       , Command::MediaPause },
@@ -540,7 +540,7 @@ void Manager::writeDefaultFile() {
 		return;
 	}
 	const char *defaultHeader = R"HEADER(
-// This is a list of default shortcuts for Telegram Desktop
+// This is a list of default shortcuts for FluxGram
 // Please don't modify it, its content is not used in any way
 // You can place your own shortcuts in the 'shortcuts-custom.json' file
 
@@ -647,7 +647,7 @@ void Manager::writeCustomFile() {
 		return;
 	}
 	const char *customHeader = R"HEADER(
-// This is a list of changed shortcuts for Telegram Desktop
+// This is a list of changed shortcuts for FluxGram
 // You can edit them in Settings > Chat Settings > Keyboard Shortcuts.
 
 )HEADER";
@@ -1053,3 +1053,4 @@ void Listen(not_null<QWidget*> widget) {
 }
 
 } // namespace Shortcuts
+

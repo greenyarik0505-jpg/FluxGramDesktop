@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/history_item_components.h"
 
@@ -61,7 +61,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtGui/QGuiApplication>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/features/filters/filters_controller.h"
 
 namespace {
@@ -1571,3 +1571,5 @@ float64 HistoryDocumentVoice::seekingCurrent() const {
 void HistoryDocumentVoice::setSeekingCurrent(float64 seekingCurrent) {
 	_seekingCurrent = qRound(seekingCurrent * kFloatToIntMultiplier);
 }
+
+

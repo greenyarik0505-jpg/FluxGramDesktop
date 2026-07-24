@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "window/window_session_controller.h"
 
@@ -127,7 +127,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_dialogs.h"
 #include "styles/style_layers.h" // st::boxLabel
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -2774,7 +2774,7 @@ void SessionController::showCalendar(ShowCalendarDescriptor &&descriptor) {
 	}();
 	const auto minPeerDate = [&] {
 		const auto startDate = [&] {
-			// Telegram was launched in August 2013 :)
+			// FluxGram was launched in August 2013 :)
 			return QDate(2013, 8, 1);
 		};
 		if (topic) {
@@ -3991,3 +3991,6 @@ bool CheckAndJumpToNearChatsFilter(
 }
 
 } // namespace Window
+
+
+

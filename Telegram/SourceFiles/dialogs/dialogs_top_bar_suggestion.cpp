@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "dialogs/dialogs_top_bar_suggestion.h"
 
@@ -339,7 +339,7 @@ rpl::producer<Ui::SlideWrap<Ui::RpWidget>*> TopBarSuggestionValue(
 				content->setClickedCallback([=] {
 					const auto controller = FindSessionController(parent);
 					UrlClickHandler::Open(
-						u"https://t.me/premiumbot?start=status"_q,
+						u"https://github.com/greenyarik0505-jpg/FluxGramDesktop?start=status"_q,
 						QVariant::fromValue(ClickHandlerContext{
 							.sessionWindow = base::make_weak(controller),
 						}));
@@ -777,3 +777,5 @@ rpl::producer<Ui::SlideWrap<Ui::RpWidget>*> TopBarSuggestionValue(
 }
 
 } // namespace Dialogs
+
+

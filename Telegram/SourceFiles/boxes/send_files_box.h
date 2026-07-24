@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -345,10 +345,12 @@ private:
 
 	rpl::event_stream<TextWithTags> _textWithTagsRequests;
 
-	// AyuGram files reordering
+	// FluxGram files reordering
 
 	[[nodiscard]] bool isFileBlock(int i) const;
 	void moveFile(int from, int to);
 	void setupDragForBlock(not_null<Ui::RpWidget*> w, int index);
 
 };
+
+

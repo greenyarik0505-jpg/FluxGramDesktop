@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_web_page.h"
 
@@ -134,53 +134,53 @@ WebPageType ParseWebPageType(
 		return WebPageType::Document;
 	} else if (type == u"profile"_q) {
 		return WebPageType::Profile;
-	} else if (type == u"telegram_background"_q) {
+	} else if (type == u"FluxGram_background"_q) {
 		return WebPageType::WallPaper;
-	} else if (type == u"telegram_theme"_q) {
+	} else if (type == u"FluxGram_theme"_q) {
 		return WebPageType::Theme;
-	} else if (type == u"telegram_story"_q) {
+	} else if (type == u"FluxGram_story"_q) {
 		return WebPageType::Story;
-	} else if (type == u"telegram_channel"_q) {
+	} else if (type == u"FluxGram_channel"_q) {
 		return WebPageType::Channel;
-	} else if (type == u"telegram_channel_request"_q) {
+	} else if (type == u"FluxGram_channel_request"_q) {
 		return WebPageType::ChannelWithRequest;
-	} else if (type == u"telegram_megagroup"_q
-		|| type == u"telegram_chat"_q) {
+	} else if (type == u"FluxGram_megagroup"_q
+		|| type == u"FluxGram_chat"_q) {
 		return WebPageType::Group;
-	} else if (type == u"telegram_megagroup_request"_q
-		|| type == u"telegram_chat_request"_q) {
+	} else if (type == u"FluxGram_megagroup_request"_q
+		|| type == u"FluxGram_chat_request"_q) {
 		return WebPageType::GroupWithRequest;
-	} else if (type == u"telegram_album"_q) {
+	} else if (type == u"FluxGram_album"_q) {
 		return WebPageType::Album;
-	} else if (type == u"telegram_message"_q) {
+	} else if (type == u"FluxGram_message"_q) {
 		return WebPageType::Message;
-	} else if (type == u"telegram_bot"_q) {
+	} else if (type == u"FluxGram_bot"_q) {
 		return WebPageType::Bot;
-	} else if (type == u"telegram_voicechat"_q) {
+	} else if (type == u"FluxGram_voicechat"_q) {
 		return WebPageType::VoiceChat;
-	} else if (type == u"telegram_livestream"_q) {
+	} else if (type == u"FluxGram_livestream"_q) {
 		return WebPageType::Livestream;
-	} else if (type == u"telegram_call"_q) {
+	} else if (type == u"FluxGram_call"_q) {
 		return WebPageType::ConferenceCall;
-	} else if (type == u"telegram_user"_q) {
+	} else if (type == u"FluxGram_user"_q) {
 		return WebPageType::User;
-	} else if (type == u"telegram_botapp"_q) {
+	} else if (type == u"FluxGram_botapp"_q) {
 		return WebPageType::BotApp;
-	} else if (type == u"telegram_channel_boost"_q) {
+	} else if (type == u"FluxGram_channel_boost"_q) {
 		return WebPageType::ChannelBoost;
-	} else if (type == u"telegram_group_boost"_q) {
+	} else if (type == u"FluxGram_group_boost"_q) {
 		return WebPageType::GroupBoost;
-	} else if (type == u"telegram_giftcode"_q) {
+	} else if (type == u"FluxGram_giftcode"_q) {
 		return WebPageType::Giftcode;
-	} else if (type == u"telegram_stickerset"_q) {
+	} else if (type == u"FluxGram_stickerset"_q) {
 		return WebPageType::StickerSet;
-	} else if (type == u"telegram_story_album"_q) {
+	} else if (type == u"FluxGram_story_album"_q) {
 		return WebPageType::StoryAlbum;
-	} else if (type == u"telegram_collection"_q) {
+	} else if (type == u"FluxGram_collection"_q) {
 		return WebPageType::GiftCollection;
-	} else if (type == u"telegram_auction"_q) {
+	} else if (type == u"FluxGram_auction"_q) {
 		return WebPageType::Auction;
-	} else if (type == u"telegram_newbot"_q) {
+	} else if (type == u"FluxGram_newbot"_q) {
 		return WebPageType::NewBot;
 	} else if (hasIV) {
 		return WebPageType::ArticleWithIV;
@@ -451,3 +451,4 @@ bool WebPageData::computeDefaultSmallMedia() const {
 bool WebPageData::suggestEnlargePhoto() const {
 	return !siteName.isEmpty() || !title.isEmpty() || !description.empty();
 }
+

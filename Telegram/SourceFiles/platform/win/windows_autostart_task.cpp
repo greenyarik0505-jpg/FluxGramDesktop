@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "platform/win/windows_autostart_task.h"
 
@@ -71,7 +71,7 @@ void Toggle(bool enabled, Fn<void(bool)> done) {
 		});
 	};
 	base::WinRT::Try([&] {
-		StartupTask::GetAsync(L"TelegramStartupTask").Completed([=](
+		StartupTask::GetAsync(L"FluxGramStartupTask").Completed([=](
 				IAsyncOperation<StartupTask> operation,
 				AsyncStatus status) {
 			base::WinRT::Try([&] {
@@ -94,7 +94,7 @@ void RequestState(Fn<void(bool)> callback) {
 		callback(IsEnabled(task.State()));
 	};
 	base::WinRT::Try([&] {
-		StartupTask::GetAsync(L"TelegramStartupTask").Completed([=](
+		StartupTask::GetAsync(L"FluxGramStartupTask").Completed([=](
 				IAsyncOperation<StartupTask> operation,
 				AsyncStatus status) {
 			base::WinRT::Try([&] {
@@ -109,3 +109,4 @@ void OpenSettings() {
 }
 
 } // namespace Platform::AutostartTask
+

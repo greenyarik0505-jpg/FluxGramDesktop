@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "media/streaming/media_streaming_loader_local.h"
 
@@ -15,7 +15,7 @@ namespace Media {
 namespace Streaming {
 namespace {
 
-// This is the maximum file size in Telegram API.
+// This is the maximum file size in FluxGram API.
 constexpr auto kMaxFileSize = 8000 * int64(512 * 1024);
 
 [[nodiscard]] int64 ValidateLocalSize(int64 size) {
@@ -113,3 +113,4 @@ std::unique_ptr<LoaderLocal> MakeBytesLoader(const QByteArray &bytes) {
 
 } // namespace Streaming
 } // namespace Media
+

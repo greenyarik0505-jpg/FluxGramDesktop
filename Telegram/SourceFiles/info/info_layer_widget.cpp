@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "info/info_layer_widget.h"
 
@@ -217,7 +217,7 @@ bool LayerWidget::takeToThirdSection() {
 	//// the third section, so that when we close it we won't
 	//// shrink the window size.
 	////
-	//// See https://github.com/telegramdesktop/tdesktop/issues/4091
+	//// See https://github.com/FluxGramdesktop/tdesktop/issues/4091
 	//localCopy->session()().settings().setThirdSectionExtendedBy(0);
 
 	//localCopy->session()().settings().setThirdSectionInfoEnabled(true);
@@ -385,3 +385,4 @@ LayerWidget::~LayerWidget() {
 }
 
 } // namespace Info
+

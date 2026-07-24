@@ -73,3 +73,12 @@ settings.local.json
 
 # Project specific
 Telegram/SourceFiles/_other/packer_private.h
+
+FluxGram.exe
+FluxGramSetup.exe
+fluxgram_clean_icon.png
+fix_*.py
+check_*.py
+install_*.py
+build/
+

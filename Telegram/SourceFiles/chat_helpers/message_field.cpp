@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "chat_helpers/message_field.h"
 
@@ -1644,15 +1644,17 @@ Ui::InputField::MimeDataHook WrappedMessageFieldMimeHook(
 	return [field, originalHook = std::move(original)](
 			not_null<const QMimeData*> data,
 			Ui::InputField::MimeAction action) {
-		if (data->hasFormat(u"application/x-telegram-input-field"_q)) {
+		if (data->hasFormat(u"application/x-FluxGram-input-field"_q)) {
 			if (action == Ui::InputField::MimeAction::Check) {
 				return true;
 			}
 			const auto text = QString::fromUtf8(
-				data->data(u"application/x-telegram-input-field"_q));
+				data->data(u"application/x-FluxGram-input-field"_q));
 			field->textCursor().insertText(text);
 			return true;
 		}
 		return originalHook ? originalHook(data, action) : false;
 	};
 }
+
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "ui/controls/round_video_recorder.h"
 
@@ -856,7 +856,7 @@ void RoundVideoRecorder::Private::initCircularTextImage() {
 	constexpr auto kCircularTextStartAngle = 125;
 	constexpr auto kCircularTextEndAngle = 145;
 	_circularTextImage = CircularTextImage(
-		u"Telegram"_q.toUpper(),
+		u"FluxGram"_q.toUpper(),
 		kSide,
 		kSide,
 		kCircularTextRadius,
@@ -1516,3 +1516,4 @@ void RoundVideoRecorder::resume(RoundVideoPartial partial) {
 }
 
 } // namespace Ui
+

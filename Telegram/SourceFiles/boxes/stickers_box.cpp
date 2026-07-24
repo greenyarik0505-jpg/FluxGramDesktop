@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "stickers_box.h"
 
@@ -2185,11 +2185,11 @@ void StickersBox::Inner::AddressField::correctValue(
 		u"http://"_q,
 		u"https://"_q,
 		u"www.t.me/"_q,
-		u"www.telegram.me/"_q,
-		u"www.telegram.dog/"_q,
+		u"www.FluxGram.me/"_q,
+		u"www.FluxGram.dog/"_q,
 		u"t.me/"_q,
-		u"telegram.me/"_q,
-		u"telegram.dog/"_q,
+		u"FluxGram.me/"_q,
+		u"FluxGram.dog/"_q,
 		u"addstickers/"_q,
 	};
 	for (auto &removePhrase : removeFromBeginning) {
@@ -2754,3 +2754,5 @@ void StickersBox::Inner::updateScrollbarWidth() {
 StickersBox::Inner::~Inner() {
 	clear();
 }
+
+

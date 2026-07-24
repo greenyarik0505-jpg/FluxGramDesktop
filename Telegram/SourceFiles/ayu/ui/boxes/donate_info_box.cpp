@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -178,7 +178,7 @@ void FillDonateInfoBox(not_null<Ui::GenericBox*> box, not_null<Window::SessionCo
 
 	const auto dollarAmount = RCManager::getInstance().donateAmountUsd().prepend("$");
 	const auto tonAmount = RCManager::getInstance().donateAmountTon();
-	const auto rubleAmount = RCManager::getInstance().donateAmountRub().append("₽");
+	const auto rubleAmount = RCManager::getInstance().donateAmountRub().append("?");
 
 	const auto innerText = TextWithEntities{}.append(tonSymbol).append(tonAmount).append(", ").append(rubleAmount);
 	const auto str = tr::ayu_SupportBoxMakeDonationInfo(
@@ -248,3 +248,4 @@ void FillDonateInfoBox(not_null<Ui::GenericBox*> box, not_null<Window::SessionCo
 }
 
 } // namespace Ui
+

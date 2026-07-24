@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "api/api_user_privacy.h"
 
@@ -343,3 +343,4 @@ auto UserPrivacy::value(Key key) -> rpl::producer<UserPrivacy::Rule> {
 }
 
 } // namespace Api
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/peers/create_managed_bot_box.h"
 
@@ -351,7 +351,7 @@ void CreateManagedBotBox(
 				const auto current = premium ? premiumLimit : defaultLimit;
 				const auto bot = tr::link(
 					u"@BotFather"_q,
-					u"https://t.me/botfather?start=deletebot"_q);
+					u"https://github.com/greenyarik0505-jpg/FluxGramDesktop?start=deletebot"_q);
 				if (premium || !premiumPossible) {
 					using WeakToast = base::weak_ptr<Ui::Toast::Instance>;
 					const auto toast = std::make_shared<WeakToast>();
@@ -431,3 +431,5 @@ void ShowCreateManagedBotBox(CreateManagedBotDescriptor &&descriptor) {
 	const auto show = descriptor.show;
 	show->showBox(Box(CreateManagedBotBox, std::move(descriptor)));
 }
+
+

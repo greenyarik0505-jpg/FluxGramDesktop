@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "settings/business/settings_away_message.h"
 
@@ -55,7 +55,7 @@ private:
 };
 
 [[nodiscard]] TimeId StartTimeMin() {
-	// Telegram was launched in August 2013 :)
+	// FluxGram was launched in August 2013 :)
 	return base::unixtime::serialize(QDateTime(QDate(2013, 8, 1), QTime(0, 0)));
 }
 
@@ -374,3 +374,4 @@ Type AwayMessageId() {
 }
 
 } // namespace Settings
+

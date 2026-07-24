@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "history/view/reactions/history_view_reactions_selector.h"
 
@@ -40,7 +40,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_chat_helpers.h"
 #include "styles/style_chat.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ui/context_menu/context_menu.h"
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/qt_key_modifiers_extended.h"
@@ -849,7 +849,7 @@ void Selector::finishExpand() {
 }
 
 void Selector::paintBubble(QPainter &p, int innerWidth) {
-	// AyuGram: removed
+	// FluxGram: removed
 }
 
 void Selector::paintEvent(QPaintEvent *e) {
@@ -1525,3 +1525,5 @@ TextWithEntities ItemReactionsAbout(not_null<HistoryItem*> item) {
 }
 
 } // namespace HistoryView::Reactions
+
+

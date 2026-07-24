@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -75,7 +75,7 @@ void runOnce() {
 					)).send();
 					state[id] = false;
 
-					DEBUG_LOG(("[AyuGram] Sent offline for account with id %1").arg(id));
+					DEBUG_LOG(("[FluxGram] Sent offline for account with id %1").arg(id));
 				}
 			}
 		}
@@ -87,3 +87,4 @@ void initialize() {
 }
 
 }
+

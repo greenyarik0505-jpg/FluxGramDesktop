@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include <windows.h>
 #include <shellapi.h>
@@ -46,10 +46,12 @@ int APIENTRY wWinMain(
 		ShellExecute(
 			nullptr,
 			nullptr,
-			(directory + L"\\AyuGram.exe").c_str(),
+			(directory + L"\\FluxGram.exe").c_str(),
 			L"-autostart",
 			directory.data(),
 			SW_SHOWNORMAL);
 	}
 	return 0;
 }
+
+

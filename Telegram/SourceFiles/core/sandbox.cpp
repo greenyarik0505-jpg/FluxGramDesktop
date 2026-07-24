@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/sandbox.h"
 
@@ -135,8 +135,8 @@ int Sandbox::start() {
 		});
 	});
 
-	// https://github.com/telegramdesktop/tdesktop/issues/948
-	// and https://github.com/telegramdesktop/tdesktop/issues/5022
+	// https://github.com/FluxGramdesktop/tdesktop/issues/948
+	// and https://github.com/FluxGramdesktop/tdesktop/issues/5022
 	connect(this, &QGuiApplication::saveStateRequest, [](auto &manager) {
 		manager.setRestartHint(QSessionManager::RestartNever);
 	});
@@ -317,7 +317,7 @@ void Sandbox::socketError(QLocalSocket::LocalSocketError e) {
 	}
 
 	if (e == QLocalSocket::ServerNotFoundError) {
-		LOG(("This is the only instance of Telegram, starting server and app..."));
+		LOG(("This is the only instance of FluxGram, starting server and app..."));
 	} else {
 		LOG(("Socket connect error %1, starting server and app...").arg(e));
 	}
@@ -644,3 +644,4 @@ rpl::producer<> on_main_update_requests() {
 }
 
 } // namespace crl
+

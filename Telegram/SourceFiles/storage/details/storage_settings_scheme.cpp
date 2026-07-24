@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "storage/details/storage_settings_scheme.h"
 
@@ -30,7 +30,7 @@ using Cache::Database;
 
 [[nodiscard]] bool NoTimeLimit(qint32 storedLimitValue) {
 	// This is a workaround for a bug in storing the cache time limit.
-	// See https://github.com/telegramdesktop/tdesktop/issues/5611
+	// See https://github.com/FluxGramdesktop/tdesktop/issues/5611
 	return !storedLimitValue
 		|| (storedLimitValue == qint32(std::numeric_limits<int32>::max()))
 		|| (storedLimitValue == qint32(std::numeric_limits<int64>::max()));
@@ -1200,3 +1200,4 @@ void ApplyReadFallbackConfig(ReadSettingsContext &context) {
 
 } // namespace details
 } // namespace Storage
+

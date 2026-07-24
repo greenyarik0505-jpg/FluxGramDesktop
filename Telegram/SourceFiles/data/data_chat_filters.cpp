@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_chat_filters.h"
 
@@ -25,7 +25,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "main/main_app_config.h"
 #include "apiwrap.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 
@@ -509,7 +509,7 @@ void ChatFilters::requestToggleTags(bool value, Fn<void()> fail) {
 }
 
 void ChatFilters::received(const QVector<MTPDialogFilter> &list) {
-	// AyuGram hideAllChatsFolder
+	// FluxGram hideAllChatsFolder
 	const auto &settings = AyuSettings::getInstance();
 
 	auto position = 0;
@@ -551,7 +551,7 @@ void ChatFilters::received(const QVector<MTPDialogFilter> &list) {
 }
 
 void ChatFilters::apply(const MTPUpdate &update) {
-	// AyuGram hideAllChatsFolder
+	// FluxGram hideAllChatsFolder
 	const auto &settings = AyuSettings::getInstance();
 
 	update.match([&](const MTPDupdateDialogFilter &data) {
@@ -935,7 +935,7 @@ FilterId ChatFilters::defaultId() const {
 FilterId ChatFilters::lookupId(int index) const {
 	// Expects(index >= 0 && index < _list.size());
 	if (!(index >= 0 && index < _list.size())) {
-		return FilterId(); // AyuGram: fix crash when using `hideAllChatsFolder`
+		return FilterId(); // FluxGram: fix crash when using `hideAllChatsFolder`
 	}
 
 	const auto &settings = AyuSettings::getInstance();
@@ -1199,3 +1199,5 @@ bool CanRemoveFromChatFilter(
 }
 
 } // namespace Data
+
+

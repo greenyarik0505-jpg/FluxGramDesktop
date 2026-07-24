@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -22,7 +22,7 @@ class Session;
 
 enum class PeerIdDisplay {
 	Hidden = 0,
-	TelegramApi = 1,
+	FluxGramApi = 1,
 	BotApi = 2,
 };
 
@@ -39,7 +39,7 @@ enum class ContextMenuVisibility {
 };
 
 enum class TranslationProvider {
-	Telegram = 0,
+	FluxGram = 0,
 	Google = 1,
 	Yandex = 2,
 	Native = 3,
@@ -53,7 +53,7 @@ enum class SendWithoutSoundOption {
 
 NLOHMANN_JSON_SERIALIZE_ENUM(PeerIdDisplay, {
 	{PeerIdDisplay::Hidden, 0},
-	{PeerIdDisplay::TelegramApi, 1},
+	{PeerIdDisplay::FluxGramApi, 1},
 	{PeerIdDisplay::BotApi, 2},
 })
 
@@ -70,7 +70,7 @@ NLOHMANN_JSON_SERIALIZE_ENUM(ContextMenuVisibility, {
 })
 
 NLOHMANN_JSON_SERIALIZE_ENUM(TranslationProvider, {
-	{TranslationProvider::Telegram, "telegram"},
+	{TranslationProvider::FluxGram, "FluxGram"},
 	{TranslationProvider::Google, "google"},
 	{TranslationProvider::Yandex, "yandex"},
 	{TranslationProvider::Native, "native"},
@@ -647,7 +647,7 @@ private:
 	rpl::variable<bool> _simpleQuotesAndReplies = false;
 	rpl::variable<bool> _hideFastShare = false;
 	rpl::variable<bool> _replaceBottomInfoWithIcons = true;
-	rpl::variable<QString> _deletedMark = QString::fromUtf8("🧹");
+	rpl::variable<QString> _deletedMark = QString::fromUtf8("??");
 	rpl::variable<QString> _editedMark;
 	rpl::variable<int> _recentStickersCount = 100;
 	rpl::variable<ContextMenuVisibility> _showReactionsPanelInContextMenu = ContextMenuVisibility::Visible;
@@ -695,7 +695,7 @@ private:
 	rpl::variable<bool> _stickerConfirmation = false;
 	rpl::variable<bool> _gifConfirmation = false;
 	rpl::variable<bool> _voiceConfirmation = false;
-	rpl::variable<TranslationProvider> _translationProvider = TranslationProvider::Telegram;
+	rpl::variable<TranslationProvider> _translationProvider = TranslationProvider::FluxGram;
 	rpl::variable<bool> _adaptiveCoverColor = true;
 	rpl::variable<bool> _improveLinkPreviews = false;
 	rpl::variable<bool> _crashReporting = true;
@@ -710,3 +710,5 @@ private:
 
 void to_json(nlohmann::json &j, const AyuSettings &s);
 void from_json(const nlohmann::json &j, AyuSettings &s);
+
+

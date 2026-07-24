@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/share_box.h"
 
@@ -63,7 +63,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtGui/QGuiApplication>
 #include <QtGui/QClipboard>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/features/forward/ayu_forward.h"
 
 
@@ -1746,7 +1746,7 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 			&& result.front()->peer()->isSelf()
 			&& history->session().premium();
 
-		// AyuGram-changed
+		// FluxGram-changed
 		const auto dismiss = [=]
 		{
 			if (show->valid()) {
@@ -1781,7 +1781,7 @@ ShareBox::SubmitCallback ShareBox::DefaultForwardCallback(
 			dismiss();
 			return;
 		}
-		// AyuGram-changed
+		// FluxGram-changed
 
 		for (const auto &thread : result) {
 			const auto peer = thread->peer();
@@ -2190,3 +2190,5 @@ auto ShareMessageMoneyRestrictionError()
 -> Fn<RecipientMoneyRestrictionError(not_null<UserData*>)> {
 	return WriteMoneyRestrictionError;
 }
+
+

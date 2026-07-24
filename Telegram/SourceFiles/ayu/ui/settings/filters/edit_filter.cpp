@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -268,3 +268,4 @@ object_ptr<Ui::GenericBox> RegexEditBox(RegexFilter *filter,
 }
 
 } // namespace Settings
+

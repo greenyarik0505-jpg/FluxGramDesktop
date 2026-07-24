@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "data/data_message_reactions.h"
 
@@ -42,7 +42,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include "base/random.h"
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 #include "ayu/utils/telegram_helpers.h"
 
@@ -1600,7 +1600,7 @@ not_null<Reaction*> Reactions::lookupPaid() {
 		const auto select = generate(u"star_reaction_select"_q);
 		_paid.emplace(Reaction{
 			.id = ReactionId::Paid(),
-			.title = u"Telegram Star"_q,
+			.title = u"FluxGram Star"_q,
 			.appearAnimation = appear,
 			.selectAnimation = select,
 			.centerIcon = center,
@@ -2447,3 +2447,8 @@ std::vector<ReactionId> MessageReactions::chosen() const {
 }
 
 } // namespace Data
+
+
+
+
+

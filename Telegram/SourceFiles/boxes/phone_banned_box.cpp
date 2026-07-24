@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/phone_banned_box.h"
 
@@ -28,7 +28,7 @@ void SendToBannedHelp(const QString &phone) {
 
 	const auto body = qsl("\
 I'm trying to use my mobile phone number: ") + phone + qsl("\n\
-But Telegram says it's banned. Please help.\n\
+But FluxGram says it's banned. Please help.\n\
 \n\
 App version: ") + version + qsl("\n\
 OS version: ") + ::Platform::SystemVersionPretty() + qsl("\n\
@@ -70,3 +70,4 @@ void ShowPhoneBannedError(
 }
 
 } // namespace Ui
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #pragma once
 
@@ -265,3 +265,4 @@ using HistoryDrafts = base::flat_map<DraftKey, std::unique_ptr<Draft>>;
 void SetChatLinkDraft(not_null<PeerData*> peer, TextWithEntities draft);
 
 } // namespace Data
+

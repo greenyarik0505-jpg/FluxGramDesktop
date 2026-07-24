@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -1788,3 +1788,4 @@ QPoint InnerWidget::mapPointToItem(QPoint point, const Element *view) const {
 InnerWidget::~InnerWidget() = default;
 
 } // namespace MessageHistory
+

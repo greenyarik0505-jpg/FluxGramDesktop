@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/language_box.h"
 
@@ -512,7 +512,7 @@ bool Rows::hasMenu(not_null<const Row*> row) const {
 }
 
 void Rows::share(not_null<const Row*> row) const {
-	const auto link = u"https://t.me/setlanguage/"_q + row->data.id;
+	const auto link = u"https://github.com/greenyarik0505-jpg/FluxGramDesktop/"_q + row->data.id;
 	QGuiApplication::clipboard()->setText(link);
 	Ui::Toast::Show(tr::lng_username_copied(tr::now));
 }
@@ -1562,3 +1562,5 @@ base::binary_guard LanguageBox::Show(
 
 	return result;
 }
+
+

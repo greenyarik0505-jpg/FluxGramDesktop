@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "logs.h"
 
@@ -408,7 +408,7 @@ void start() {
 	}
 
 #ifdef Q_OS_WIN
-	if (cWorkingDir() == psAppDataPath()) { // fix old "Telegram Win (Unofficial)" version
+	if (cWorkingDir() == psAppDataPath()) { // fix old "FluxGram Win (Unofficial)" version
 		MoveOldDataFiles(psAppDataPathOld());
 	}
 #elif !defined Q_OS_MAC && !defined _DEBUG // fix first version
@@ -598,3 +598,4 @@ QString full() {
 }
 
 } // namespace Logs
+

@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -70,7 +70,7 @@ constexpr auto regDateBotId = 8083294286L;
 const auto regDateBotUsername = QString("exteraAuthBot");
 
 constexpr auto regDateBotFallbackId = 6247153446L;
-const auto regDateBotFallbackUsername = QString("ayugrambot");
+const auto regDateBotFallbackUsername = QString("FluxGrambot");
 
 const auto kZalgoPattern = QStringLiteral(
 	"\\p{Mn}{3,}|[\\x{202A}-\\x{202E}\\x{2066}-\\x{2069}\\x{200E}\\x{200F}\\x{061C}]");
@@ -850,16 +850,16 @@ void searchPeerInner(const QString &peerId, Main::Session *session, const Userna
 				continue;
 			}
 
-			QString id; // 🆔
-			QString title; // 🏷
-			QString username; // 📧
+			QString id; // ??
+			QString title; // ??
+			QString username; // ??
 
 			for (auto &line : text.split('\n')) {
-				if (line.startsWith("🆔")) {
+				if (line.startsWith("??")) {
 					id = line.mid(line.indexOf(": ") + 2).trimmed();
-				} else if (line.startsWith("🏷")) {
+				} else if (line.startsWith("??")) {
 					title = line.mid(line.indexOf(": ") + 2);
-				} else if (line.startsWith("📧")) {
+				} else if (line.startsWith("??")) {
 					username = line.mid(line.indexOf(": ") + 2);
 				}
 			}
@@ -996,7 +996,7 @@ TextWithTags extractText(not_null<HistoryItem*> item) {
 	QString text;
 	if (const auto media = item->media()) {
 		if (const auto poll = media->poll()) {
-			text.append("\xF0\x9F\x93\x8A ") // 📊
+			text.append("\xF0\x9F\x93\x8A ") // ??
 				.append(poll->question.text).append("\n");
 			for (const auto &answer : poll->answers) {
 				text.append("• ").append(answer.text.text).append("\n");
@@ -1573,3 +1573,8 @@ void applyGhostScheduling(
 		options.scheduled = base::unixtime::now() + delay;
 	}
 }
+
+
+
+
+

@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -146,12 +146,12 @@ void AyuFiltersList::addNewFilter(const RegexFilter &filter, bool exclusion) {
 		Expects(dialogId.has_value());
 
 		/*
-		└── class Info::WrapWidget
-			└── class Info::Settings::Widget
-				└── class Ui::ScrollArea
-					└── class QWidget
-						└── class Ui::PaddingWrap<class Ui::RpWidget>
-							└── class Settings::AyuFiltersList
+		L-- class Info::WrapWidget
+			L-- class Info::Settings::Widget
+				L-- class Ui::ScrollArea
+					L-- class QWidget
+						L-- class Ui::PaddingWrap<class Ui::RpWidget>
+							L-- class Settings::AyuFiltersList
 		 */
 		// controller->showBackFromStack() doesn't work (closes box completely)
 		// so as a workaround, use WrapWidget
@@ -304,3 +304,8 @@ void AyuFiltersList::setupContent(not_null<Window::SessionController*> controlle
 }
 
 } // namespace Settings
+
+
+
+
+

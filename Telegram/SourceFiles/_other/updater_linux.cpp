@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #define _GLIBCXX_USE_CXX11_ABI 0
 #include <cstdio>
@@ -269,7 +269,7 @@ bool update() {
 						writeLog("Error: bad update, has Updater! '%s' equal '%s'", tofname.c_str(), updaterName.c_str());
 						delFolder();
 						return false;
-					} else if (equal(tofname, exePath + "Telegram") && exeName != "Telegram") {
+					} else if (equal(tofname, exePath + "FluxGram") && exeName != "FluxGram") {
 						string fullBinaryPath = exePath + exeName;
 						writeLog("Target binary found: '%s', changing to '%s'", tofname.c_str(), fullBinaryPath.c_str());
 						tofname = fullBinaryPath;
@@ -399,7 +399,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	if (exeName.empty() || exeName.find('/') != string::npos) {
-		exeName = "Telegram";
+		exeName = "FluxGram";
 	}
 	openLog();
 
@@ -433,7 +433,7 @@ int main(int argc, char *argv[]) {
 					writeLog("No workdir, trying to figure it out");
 					struct passwd *pw = getpwuid(getuid());
 					if (pw && pw->pw_dir && strlen(pw->pw_dir)) {
-						string tryDir = pw->pw_dir + string("/.TelegramDesktop/");
+						string tryDir = pw->pw_dir + string("/.FluxGramDesktop/");
 						struct stat statbuf;
 						writeLog("Trying to use '%s' as workDir, getting stat() for tupdates/ready", tryDir.c_str());
 						if (!stat((tryDir + "tupdates/ready").c_str(), &statbuf)) {
@@ -511,10 +511,11 @@ int main(int argc, char *argv[]) {
 			return 1;
 		}
 
-		writeLog("Executed Telegram, closing log and quitting..");
+		writeLog("Executed FluxGram, closing log and quitting..");
 	}
 
 	closeLog();
 
 	return 0;
 }
+

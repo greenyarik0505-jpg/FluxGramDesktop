@@ -1,4 +1,4 @@
-// This is the source code of AyuGram for Desktop.
+// This is the source code of FluxGram for Desktop.
 //
 // We do not and cannot prevent the use of our code,
 // but be respectful and credit the original author.
@@ -22,3 +22,4 @@ namespace Ui {
 	TranslationProvider provider);
 
 } // namespace Ui
+

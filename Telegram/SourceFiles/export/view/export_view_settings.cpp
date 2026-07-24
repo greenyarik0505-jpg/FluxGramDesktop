@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "export/view/export_view_settings.h"
 
@@ -631,7 +631,7 @@ void SettingsWidget::editDateLimit(
 		.st = st::exportCalendarSizes,
 		.minDate = (min
 			? base::unixtime::parse(min).date()
-			: QDate(2013, 8, 1)), // Telegram was launched in August 2013 :)
+			: QDate(2013, 8, 1)), // FluxGram was launched in August 2013 :)
 		.maxDate = (max
 			? base::unixtime::parse(max).date()
 			: QDate::currentDate()),
@@ -955,3 +955,4 @@ rpl::producer<> SettingsWidget::cancelClicks() const {
 
 } // namespace View
 } // namespace Export
+

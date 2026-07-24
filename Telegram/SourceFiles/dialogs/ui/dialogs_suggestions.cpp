@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "dialogs/ui/dialogs_suggestions.h"
 
@@ -2959,7 +2959,7 @@ object_ptr<Ui::BoxContent> PopularAppsAboutBox(
 			lt_bot,
 			rpl::single(tr::link(
 				u"@botfather"_q,
-				u"https://t.me/botfather"_q)),
+				u"https://github.com/greenyarik0505-jpg/FluxGramDesktop"_q)),
 			lt_link,
 			tr::lng_popular_apps_info_here(
 				tr::url(tr::lng_popular_apps_info_url(tr::now))),
@@ -2970,3 +2970,5 @@ object_ptr<Ui::BoxContent> PopularAppsAboutBox(
 }
 
 } // namespace Dialogs
+
+

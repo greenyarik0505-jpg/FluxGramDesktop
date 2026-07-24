@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "settings/sections/settings_chat.h"
 
@@ -90,7 +90,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QAction>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/features/message_shot/message_shot.h"
 #include "window/themes/window_theme_preview.h"
 
@@ -2975,3 +2975,5 @@ Type ChatId() {
 }
 
 } // namespace Settings
+
+

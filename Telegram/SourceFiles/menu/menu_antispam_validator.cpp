@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "menu/menu_antispam_validator.h"
 
@@ -35,13 +35,13 @@ namespace {
 
 [[nodiscard]] int EnableAntiSpamMinMembers(not_null<ChannelData*> channel) {
 	return channel->session().appConfig().get<int>(
-		u"telegram_antispam_group_size_min"_q,
+		u"FluxGram_antispam_group_size_min"_q,
 		100);
 }
 
 [[nodiscard]] UserId AntiSpamUserId(not_null<ChannelData*> channel) {
 	const auto id = channel->session().appConfig().get<QString>(
-		u"telegram_antispam_user_id"_q,
+		u"FluxGram_antispam_user_id"_q,
 		QString());
 	return UserId(id.toULongLong());
 }
@@ -204,3 +204,4 @@ void AntiSpamValidator::addEventMsgId(FullMsgId fakeId, MsgId realId) {
 }
 
 } // namespace AntiSpamMenu
+

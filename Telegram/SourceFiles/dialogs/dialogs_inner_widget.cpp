@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "dialogs/dialogs_inner_widget.h"
 
@@ -92,7 +92,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtWidgets/QApplication>
 #include <QtCore/QMimeData>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ui/ayu_userpic.h"
 #include "ayu/utils/telegram_helpers.h"
 #include "styles/style_ayu_icons.h"
@@ -1820,13 +1820,13 @@ void InnerWidget::performDrag() {
 		return data;
 	}();
 	mimeData->setData(
-		u"application/x-telegram-dialog"_q,
+		u"application/x-FluxGram-dialog"_q,
 		std::move(byteArray));
 
 	if (const auto u = history->peer->username(); !u.isEmpty()) {
 		mimeData->setText(history->peer->session().createInternalLinkFull(u));
 		mimeData->setData(
-			u"application/x-telegram-input-field"_q,
+			u"application/x-FluxGram-input-field"_q,
 			('@' + u).toUtf8());
 	}
 
@@ -5872,3 +5872,8 @@ void InnerWidget::deactivateQuickAction() {
 }
 
 } // namespace Dialogs
+
+
+
+
+

@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/click_handler_types.h"
 
@@ -45,7 +45,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include <QtCore/QDateTime>
 #include <QtCore/QLocale>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_settings.h"
 
 namespace {
@@ -137,12 +137,12 @@ void ExportToCalendar(TimeId date, const QString &messageText) {
 	const auto uid = base::RandomValue<uint64>();
 	const auto content = u"BEGIN:VCALENDAR\r\n"
 		"VERSION:2.0\r\n"
-		"PRODID:-//Telegram Desktop//EN\r\n"
+		"PRODID:-//FluxGram//EN\r\n"
 		"BEGIN:VEVENT\r\n"
 		"DTSTART:%1\r\n"
 		"DTEND:%2\r\n"
 		"DTSTAMP:%3\r\n"
-		"UID:telegram-%4-%7@telegram.org\r\n"
+		"UID:FluxGram-%4-%7@FluxGram.org\r\n"
 		"SUMMARY:%5\r\n"
 		"DESCRIPTION:%6\r\n"
 		"END:VEVENT\r\n"
@@ -205,7 +205,7 @@ bool UrlRequiresConfirmation(const QUrl &url) {
 
 	return !regex_match(
 		"(^|\\.)("
-		"telegram\\.(org|me|dog)"
+		"FluxGram\\.(org|me|dog)"
 		"|t\\.me"
 		"|te\\.?legra\\.ph"
 		"|graph\\.org"
@@ -633,3 +633,5 @@ QString FormattedDateClickHandler::tooltip() const {
 		base::unixtime::parse(_date),
 		QLocale::LongFormat);
 }
+
+

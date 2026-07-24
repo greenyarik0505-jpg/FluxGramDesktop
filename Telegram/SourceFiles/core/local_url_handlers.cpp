@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "core/local_url_handlers.h"
 
@@ -75,7 +75,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 
 #include <QtGui/QGuiApplication>
 
-// AyuGram includes
+// FluxGram includes
 #include "ayu/ayu_url_handlers.h"
 
 
@@ -575,7 +575,7 @@ bool ResolveUsernameOrPhone(
 	const auto validPhone = [](const QString &phone) {
 		return qthelp::regex_match(u"^[0-9]+$"_q, phone, {}).valid();
 	};
-	if (domain == u"telegrampassport"_q) {
+	if (domain == u"FluxGrampassport"_q) {
 		return ShowPassportForm(controller, params);
 	} else if (!validDomain(domain) && !validPhone(phone)) {
 		return false;
@@ -1891,9 +1891,9 @@ QString TryConvertUrlToLocal(QString url) {
 				: url;
 		}
 	}
-	auto telegramMeMatch = regex_match(u"^(https?://)?(www\\.)?(telegram\\.(me|dog)|t\\.me)/(.+)$"_q, url, matchOptions);
-	if (telegramMeMatch) {
-		const auto query = telegramMeMatch->capturedView(5);
+	auto FluxGramMeMatch = regex_match(u"^(https?://)?(www\\.)?(FluxGram\\.(me|dog)|t\\.me)/(.+)$"_q, url, matchOptions);
+	if (FluxGramMeMatch) {
+		const auto query = FluxGramMeMatch->capturedView(5);
 		if (const auto phoneMatch = regex_match(u"^\\+([0-9]+)(\\?|$)"_q, query, matchOptions)) {
 			const auto params = query.mid(phoneMatch->captured(0).size()).toString();
 			return u"tg://resolve?phone="_q + phoneMatch->captured(1) + (params.isEmpty() ? QString() : '&' + params);
@@ -2060,7 +2060,7 @@ bool InternalPassportOrOAuthLink(const QString &url) {
 			UrlParamNameTransform::ToLower);
 		usernameValue = params.value(u"domain"_q);
 	}
-	const auto authLegacy = (usernameValue == u"telegrampassport"_q);
+	const auto authLegacy = (usernameValue == u"FluxGrampassport"_q);
 	const auto oauthLegacy = (usernameValue == u"oauth"_q);
 	return authMatch->hasMatch()
 		|| oauthMatch->hasMatch()
@@ -2142,3 +2142,6 @@ TimeId ParseVideoTimestamp(QStringView value) {
 }
 
 } // namespace Core
+
+
+

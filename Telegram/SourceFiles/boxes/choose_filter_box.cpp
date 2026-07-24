@@ -1,9 +1,9 @@
 /*
-This file is part of Telegram Desktop,
-the official desktop application for the Telegram messaging service.
+This file is part of FluxGram,
+the official desktop application for the FluxGram messaging service.
 
 For license and copyright information please follow this link:
-https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+https://github.com/FluxGramdesktop/tdesktop/blob/master/LEGAL
 */
 #include "boxes/choose_filter_box.h"
 
@@ -473,7 +473,7 @@ bool FillChooseFilterWithAdminedGroupsMenu(
 History *HistoryFromMimeData(
 		const QMimeData *mime,
 		not_null<Main::Session*> session) {
-	const auto mimeFormat = u"application/x-telegram-dialog"_q;
+	const auto mimeFormat = u"application/x-FluxGram-dialog"_q;
 	if (mime->hasFormat(mimeFormat)) {
 		auto peerId = int64(-1);
 		auto isTestMode = false;
@@ -575,3 +575,5 @@ void SetupFilterDragAndDrop(
 		}
 	}, outer->lifetime());
 }
+
+
